@@ -61,33 +61,138 @@ O preço do móvel será a soma do preço de todas as geometrias existentes nele
 
 **EXEMPLO DE REQUISIÇÃO:**
 
-MESA
+```json
+{
+  "Móvel": "CADEIRA",
+  "Material": "Carvalho",
+  "Geometrias": [
+    {
+      "Estrutura": "perna dianteira esquerda",
+      "Geometria": "cilindro",
+      "Raio_base": "1.5cm",
+      "Altura": "40cm"
+    },
+    {
+      "Estrutura": "perna dianteira direita",
+      "Geometria": "cilindro",
+      "Raio_base": "1.5cm",
+      "Altura": "40cm"
+    },
+    {
+      "Estrutura": "perna traseira esquerda",
+      "Geometria": "cilindro",
+      "Raio_base": "1.5cm",
+      "Altura": "40cm"
+    },
+    {
+      "Estrutura": "perna traseira direita",
+      "Geometria": "cilindro",
+      "Raio_base": "1.5cm",
+      "Altura": "40cm"
+    },
+    {
+      "Estrutura": "assento",
+      "Geometria": "cubo retangular",
+      "Comprimento": "40cm",
+      "Largura": "40cm",
+      "Altura": "5cm"
+    },
+    {
+      "Estrutura": "encosto",
+      "Geometria": "paralelepípedo",
+      "Comprimento": "40cm",
+      "Largura": "2cm",
+      "Altura": "30cm"
+    }
+  ]
+}
 
-- Móvel: MESA
-- Madeira: CARVALHO
-- Geometrias: 
-	- Estrutura: perna 1
-	  - Geometria: cilindro
-	  - Raio base: 2cm
-	  - Altura: 70cm
+```
 
-	- Estrutura: perna 2
-	  - Geometria: cilindro
-	  - Raio base: 2cm
-	  - Altura: 70cm
+```json
+{
+  "Móvel": "ESTANTE",
+  "Material": "CARVALHO",
+  "Geometrias": [
+    {
+      "Estrutura": "prateleira 1",
+      "Geometria": "cubo retangular",
+      "Comprimento": "80cm",
+      "Largura": "30cm",
+      "Altura": "2cm"
+    },
+    {
+      "Estrutura": "prateleira 2",
+      "Geometria": "cubo retangular",
+      "Comprimento": "80cm",
+      "Largura": "30cm",
+      "Altura": "2cm"
+    },
+    {
+      "Estrutura": "prateleira 3",
+      "Geometria": "cubo retangular",
+      "Comprimento": "80cm",
+      "Largura": "30cm",
+      "Altura": "2cm"
+    },
+    {
+      "Estrutura": "pilar esquerdo",
+      "Geometria": "cilindro",
+      "Raio_base": "2cm",
+      "Altura": "100cm"
+    },
+    {
+      "Estrutura": "pilar direito",
+      "Geometria": "cilindro",
+      "Raio_base": "2cm",
+      "Altura": "100cm"
+    }
+  ]
+}
+```
 
-	- Estrutura: perna 3
-	  - Geometria: cilindro
-	  - Raio base: 2cm
-	  - Altura: 70cm
+```json
+{
+  "Móvel": "CÔMODA",
+  "Material": "PINHO",
+  "Geometrias": [
+    {
+      "Estrutura": "gaveta superior",
+      "Geometria": "paralelepípedo",
+      "Comprimento": "60cm",
+      "Largura": "40cm",
+      "Altura": "15cm"
+    },
+    {
+      "Estrutura": "gaveta do meio",
+      "Geometria": "paralelepípedo",
+      "Comprimento": "60cm",
+      "Largura": "40cm",
+      "Altura": "15cm"
+    },
+    {
+      "Estrutura": "gaveta inferior",
+      "Geometria": "paralelepípedo",
+      "Comprimento": "60cm",
+      "Largura": "40cm",
+      "Altura": "20cm"
+    },
+    {
+      "Estrutura": "base",
+      "Geometria": "cubo retangular",
+      "Comprimento": "70cm",
+      "Largura": "50cm",
+      "Altura": "5cm"
+    },
+    {
+      "Estrutura": "pés",
+      "Geometria": "cilindro",
+      "Raio_base": "2cm",
+      "Altura": "15cm"
+    }
+  ]
+}
 
-	- Estrutura: perna 4
-	  - Geometria: cilindro
-	  - Raio base: 2cm
-	  - Altura: 70cm
+```
 
-	- Estrutura: base superior
-	  - Geometria: cubo retangular
-	  - Comprimento: 100cm
-	  - Largura:  70 cm
-	  - Altura: 5 cm
+A resposta você pode dar no formato que preferir. 
