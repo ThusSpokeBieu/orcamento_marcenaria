@@ -1,5 +1,6 @@
 # Orçamento Marcenaria
 
+PRAZO: Terça-Feira (23/01/2024)
 
 Você foi contratado para desenvolver uma API que calcula o orçamento de móveis planejados para uma marcenaria. O processo de orçamento envolve uma requisição REST, onde são fornecidos dados sobre o móvel, incluindo o tipo, o tipo de madeira a ser utilizado e as formas geométricas presentes.
 
