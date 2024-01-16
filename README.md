@@ -52,7 +52,7 @@ Você é livre para decidir quais são as formas geométricas existentes, mas le
   - Base: em cm,
   - Altura: em cm,
 
-O preço da geometria será: (Preço base da Madeira x Preço base da Geometria x Área da Geometria )
+O preço da geometria será: (Preço base da Madeira x Área da Geometria )
 
 **EXEMPLO DE REQUISIÇÃO:**
 
