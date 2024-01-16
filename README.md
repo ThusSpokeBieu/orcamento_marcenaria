@@ -53,6 +53,7 @@ Você é livre para decidir quais são as formas geométricas existentes, mas le
   - Altura: em cm,
 
 O preço da geometria será: (Preço base da Madeira x Área da Geometria )
+O preço do móvel será a soma do preço de todas as geometrias existentes nele.
 
 **EXEMPLO DE REQUISIÇÃO:**
 
