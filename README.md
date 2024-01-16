@@ -31,31 +31,26 @@ Você é livre para decidir quais são as formas geométricas existentes, mas le
 - **ESFERA:**
   - Tipo: esfera,
   - Raio: em cm,
-  - Preço base por área: 1.5x
 
 - **CUBO:**
   - Tipo: cubo,
   - Lado: em cm,
-  - Preço base por área: 1.0x
 
 - **CILINDRO:**
   - Tipo: cilindro,
   - Raio base: em cm,
   - Altura: em cm,
-  - Preço base por área: 1.2x
 
 - **CUBO RETANGULAR:**
   - Tipo: cubo retangular
   - Comprimento: em cm
   - Largura:  em cm
   - Altura: em cm
-  - Preço base por área: 2.0x
 
 - **PIRÂMIDE:**
   - Tipo: pirâmide,
   - Base: em cm,
   - Altura: em cm,
-  - Preço base por área: 0.5x
 
 O preço da geometria será: (Preço base da Madeira x Preço base da Geometria x Área da Geometria )
 
