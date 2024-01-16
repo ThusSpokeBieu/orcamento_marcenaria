@@ -63,89 +63,46 @@ O preço do móvel será a soma do preço de todas as geometrias existentes nele
 
 ```json
 {
-  "Móvel": "CADEIRA",
-  "Material": "Carvalho",
-  "Geometrias": [
+  "movel": "CADEIRA",
+  "material": "Carvalho",
+  "geometrias": [
     {
-      "Estrutura": "perna dianteira esquerda",
-      "Geometria": "cilindro",
-      "Raio_base": "1.5cm",
-      "Altura": "40cm"
+      "estrutura": "perna dianteira esquerda",
+      "geometria": "cilindro",
+      "raio_base": "1.5cm",
+      "altura": "40cm"
     },
     {
-      "Estrutura": "perna dianteira direita",
-      "Geometria": "cilindro",
-      "Raio_base": "1.5cm",
-      "Altura": "40cm"
+      "estrutura": "perna dianteira direita",
+      "geometria": "cilindro",
+      "raio_base": "1.5cm",
+      "altura": "40cm"
     },
     {
-      "Estrutura": "perna traseira esquerda",
-      "Geometria": "cilindro",
-      "Raio_base": "1.5cm",
-      "Altura": "40cm"
+      "estrutura": "perna traseira esquerda",
+      "geometria": "cilindro",
+      "raio_base": "1.5cm",
+      "altura": "40cm"
     },
     {
-      "Estrutura": "perna traseira direita",
-      "Geometria": "cilindro",
-      "Raio_base": "1.5cm",
-      "Altura": "40cm"
+      "estrutura": "perna traseira direita",
+      "geometria": "cilindro",
+      "raio_base": "1.5cm",
+      "altura": "40cm"
     },
     {
-      "Estrutura": "assento",
-      "Geometria": "paralelepípedo",
-      "Comprimento": "40cm",
-      "Largura": "40cm",
-      "Altura": "5cm"
+      "estrutura": "assento",
+      "geometria": "paralelepípedo",
+      "comprimento": "40cm",
+      "largura": "40cm",
+      "altura": "5cm"
     },
     {
-      "Estrutura": "encosto",
-      "Geometria": "paralelepípedo",
-      "Comprimento": "40cm",
-      "Largura": "2cm",
-      "Altura": "30cm"
-    }
-  ]
-}
-
-```
-
-```json
-{
-  "Móvel": "ESTANTE",
-  "Material": "CARVALHO",
-  "Geometrias": [
-    {
-      "Estrutura": "prateleira 1",
-      "Geometria": "paralelepípedo",
-      "Comprimento": "80cm",
-      "Largura": "30cm",
-      "Altura": "2cm"
-    },
-    {
-      "Estrutura": "prateleira 2",
-      "Geometria": "paralelepípedo",
-      "Comprimento": "80cm",
-      "Largura": "30cm",
-      "Altura": "2cm"
-    },
-    {
-      "Estrutura": "prateleira 3",
-      "Geometria": "paralelepípedo",
-      "Comprimento": "80cm",
-      "Largura": "30cm",
-      "Altura": "2cm"
-    },
-    {
-      "Estrutura": "pilar esquerdo",
-      "Geometria": "cilindro",
-      "Raio_base": "2cm",
-      "Altura": "100cm"
-    },
-    {
-      "Estrutura": "pilar direito",
-      "Geometria": "cilindro",
-      "Raio_base": "2cm",
-      "Altura": "100cm"
+      "estrutura": "encosto",
+      "geometria": "paralelepípedo",
+      "comprimento": "40cm",
+      "largura": "2cm",
+      "altura": "30cm"
     }
   ]
 }
@@ -153,46 +110,87 @@ O preço do móvel será a soma do preço de todas as geometrias existentes nele
 
 ```json
 {
-  "Móvel": "CÔMODA",
-  "Material": "PINHO",
-  "Geometrias": [
+  "movel": "ESTANTE",
+  "material": "CARVALHO",
+  "geometrias": [
     {
-      "Estrutura": "gaveta superior",
-      "Geometria": "paralelepípedo",
-      "Comprimento": "60cm",
-      "Largura": "40cm",
-      "Altura": "15cm"
+      "estrutura": "prateleira 1",
+      "geometria": "paralelepípedo",
+      "comprimento": "80cm",
+      "largura": "30cm",
+      "altura": "2cm"
     },
     {
-      "Estrutura": "gaveta do meio",
-      "Geometria": "paralelepípedo",
-      "Comprimento": "60cm",
-      "Largura": "40cm",
-      "Altura": "15cm"
+      "estrutura": "prateleira 2",
+      "geometria": "paralelepípedo",
+      "comprimento": "80cm",
+      "largura": "30cm",
+      "altura": "2cm"
     },
     {
-      "Estrutura": "gaveta inferior",
-      "Geometria": "paralelepípedo",
-      "Comprimento": "60cm",
-      "Largura": "40cm",
-      "Altura": "20cm"
+      "estrutura": "prateleira 3",
+      "geometria": "paralelepípedo",
+      "comprimento": "80cm",
+      "largura": "30cm",
+      "altura": "2cm"
     },
     {
-      "Estrutura": "base",
-      "Geometria": "paralelepípedo",
-      "Comprimento": "70cm",
-      "Largura": "50cm",
-      "Altura": "5cm"
+      "estrutura": "pilar esquerdo",
+      "geometria": "cilindro",
+      "raio_base": "2cm",
+      "altura": "100cm"
     },
     {
-      "Estrutura": "pés",
-      "Geometria": "cilindro",
-      "Raio_base": "2cm",
-      "Altura": "15cm"
+      "estrutura": "pilar direito",
+      "geometria": "cilindro",
+      "raio_base": "2cm",
+      "altura": "100cm"
     }
   ]
 }
+```
 
+```json
+{
+  "movel": "CÔMODA",
+  "material": "PINHO",
+  "geometrias": [
+    {
+      "estrutura": "gaveta superior",
+      "geometria": "paralelepipedo",
+      "comprimento": "60cm",
+      "largura": "40cm",
+      "altura": "15cm"
+    },
+    {
+      "estrutura": "gaveta do meio",
+      "geometria": "paralelepipedo",
+      "comprimento": "60cm",
+      "largura": "40cm",
+      "altura": "15cm"
+    },
+    {
+      "estrutura": "gaveta inferior",
+      "geometria": "paralelepipedo",
+      "comprimento": "60cm",
+      "largura": "40cm",
+      "altura": "20cm"
+    },
+    {
+      "estrutura": "base",
+      "geometria": "paralelepipedo",
+      "comprimento": "70cm",
+      "largura": "50cm",
+      "altura": "5cm"
+    },
+    {
+      "estrutura": "pés",
+      "geometria": "cilindro",
+      "raio_base": "2cm",
+      "altura": "15cm"
+    }
+  ]
+}
 ```
 
 A resposta você pode dar no formato que preferir. 
