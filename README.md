@@ -42,8 +42,8 @@ Você é livre para decidir quais são as formas geométricas existentes, mas le
   - Raio base: em cm,
   - Altura: em cm,
 
-- **CUBO RETANGULAR:**
-  - Tipo: cubo retangular
+- **PARALELEPÍPEDO:**
+  - Tipo: paralelepípedo
   - Comprimento: em cm
   - Largura:  em cm
   - Altura: em cm
@@ -92,7 +92,7 @@ O preço do móvel será a soma do preço de todas as geometrias existentes nele
     },
     {
       "Estrutura": "assento",
-      "Geometria": "cubo retangular",
+      "Geometria": "paralelepípedo",
       "Comprimento": "40cm",
       "Largura": "40cm",
       "Altura": "5cm"
@@ -116,21 +116,21 @@ O preço do móvel será a soma do preço de todas as geometrias existentes nele
   "Geometrias": [
     {
       "Estrutura": "prateleira 1",
-      "Geometria": "cubo retangular",
+      "Geometria": "paralelepípedo",
       "Comprimento": "80cm",
       "Largura": "30cm",
       "Altura": "2cm"
     },
     {
       "Estrutura": "prateleira 2",
-      "Geometria": "cubo retangular",
+      "Geometria": "paralelepípedo",
       "Comprimento": "80cm",
       "Largura": "30cm",
       "Altura": "2cm"
     },
     {
       "Estrutura": "prateleira 3",
-      "Geometria": "cubo retangular",
+      "Geometria": "paralelepípedo",
       "Comprimento": "80cm",
       "Largura": "30cm",
       "Altura": "2cm"
@@ -179,7 +179,7 @@ O preço do móvel será a soma do preço de todas as geometrias existentes nele
     },
     {
       "Estrutura": "base",
-      "Geometria": "cubo retangular",
+      "Geometria": "paralelepípedo",
       "Comprimento": "70cm",
       "Largura": "50cm",
       "Altura": "5cm"
