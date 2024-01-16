@@ -53,7 +53,10 @@ Você é livre para decidir quais são as formas geométricas existentes, mas le
   - Base: em cm,
   - Altura: em cm,
 
-O preço da geometria será: (Preço base da Madeira x Área da Geometria )
+A API deverá ser responsável por calcular a área da geometria (não pode-se receber via payload).
+
+O preço da geometria será: Preço base da Madeira x Área da Geometria em reais.
+
 O preço do móvel será a soma do preço de todas as geometrias existentes nele.
 
 **EXEMPLO DE REQUISIÇÃO:**
