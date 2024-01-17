@@ -29,9 +29,23 @@ pub async fn get_geometria() -> web::HttpResponse {
   web::HttpResponse::Ok().finish()
 }
 
+#[utoipa::path(
+    post,
+    path = "/orcamento",
+    request_body = Movel,
+    responses(
+        (status = 201, description = "Orçamento completo do móvel", body = FinalResult),
+        (status = 400, description = "Há algo de errado com a requisição", body = HttpError)
+    )
+)]
 #[web::post("/orcamento")]
-pub async fn post_orcamento() -> web::HttpResponse {
-  web::HttpResponse::Ok().finish()
+pub async fn post_orcamento(req_body: String) -> web::HttpResponse {
+  let mut response = web::HttpResponse::Ok().body(req_body);
+
+  response.headers_mut().insert(SERVER, web_utils::HDR_SERVER);
+  response.headers_mut().insert(CONTENT_TYPE, web_utils::HDR_JSON_CONTENT_TYPE);
+
+  response
 }
 
 pub fn ntex_config(cfg: &mut web::ServiceConfig) {

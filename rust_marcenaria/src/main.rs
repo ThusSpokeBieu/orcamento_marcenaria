@@ -19,6 +19,7 @@ async fn main() -> std::io::Result<()> {
       .configure(routes::orcamento::ntex_config)
       .default_service(route().to(routes::default))
   })
+  .workers(8)
   .bind(("0.0.0.0", 8080))?
   .run()
   .await?;
