@@ -47,6 +47,14 @@ Você é livre para decidir quais são as formas geométricas existentes, mas le
   - Comprimento: em cm
   - Largura:  em cm
   - Altura: em cm
+ 
+  
+ (pirâmide pode ser desconsiderada, mas é um desafio a mais, considere que é uma piramide quadrada para fazer o cálculo)
+- **PIRÂMIDE:**
+  - Tipo: pirâmide,
+  - Base: em cm,
+  - Altura: em cm,
+
 
 A API deverá ser responsável por calcular a área da geometria (não pode-se receber via payload).
 
