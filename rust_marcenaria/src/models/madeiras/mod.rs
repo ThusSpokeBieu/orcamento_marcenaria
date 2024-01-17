@@ -13,8 +13,10 @@ pub enum Madeira {
 
 #[derive(Debug, Clone, Serialize, Deserialize, ToSchema)]
 pub struct MadeiraInfo {
-  nome: String,
-  preco_base: f64,
+  nome: &'static str,
+  preco_base: &'static str,
+  #[serde(skip)]
+  preco_base_valor: f64,
 }
 
 impl Madeira {
@@ -30,16 +32,19 @@ impl Madeira {
   pub fn get_info(&self) -> MadeiraInfo {
     match self {
       Madeira::Pinho => MadeiraInfo {
-        nome: String::from("Pinho"),
-        preco_base: 0.10,
+        nome: "Pinho",
+        preco_base: "R$ 0,10",
+        preco_base_valor: 0.10,
       },
       Madeira::Carvalho => MadeiraInfo {
-        nome: String::from("Carvalho"),
-        preco_base: 0.30,
+        nome: "Carvalho",
+        preco_base: "R$ 0,30",
+        preco_base_valor: 0.30,
       },
       Madeira::Ebano => MadeiraInfo {
-        nome: String::from("Ebano"),
-        preco_base: 5.00,
+        nome: "Ebano",
+        preco_base: "R$ 5,00",
+        preco_base_valor: 5.00,
       },
     }
   }

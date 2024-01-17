@@ -55,11 +55,11 @@ async fn get_swagger(
 
 pub fn ntex_config(config: &mut web::ServiceConfig) {
   let swagger_config = Arc::new(
-    utoipa_swagger_ui::Config::new(["/explorer/swagger.json"])
+    utoipa_swagger_ui::Config::new(["/docs/swagger.json"])
       .use_base_layout(),
   );
   config.service(
-    web::scope("/explorer/")
+    web::scope("/docs/")
       .state(swagger_config)
       .service(get_swagger),
   );
