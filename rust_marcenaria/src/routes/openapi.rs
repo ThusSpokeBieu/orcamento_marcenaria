@@ -9,14 +9,15 @@ use crate::exceptions::http_error::HttpError;
 use crate::models::madeiras::MadeiraInfo;
 use crate::models::moveis::Movel;
 use crate::models::final_result::{FinalResult, PrecoEstrutura};
-
+use crate::models::geometrias::geometria::Geometria;
 use super::orcamento;
 
 #[derive(OpenApi)]
 #[openapi(
   paths(orcamento::get_materiais,
-    orcamento::post_orcamento),
-  components(schemas(MadeiraInfo, HttpError, Movel, FinalResult, PrecoEstrutura))
+    orcamento::post_orcamento,
+    orcamento::get_geometrias),
+  components(schemas(MadeiraInfo, HttpError, Movel, FinalResult, PrecoEstrutura, Geometria))
 )]
 pub(crate) struct ApiDoc;
 

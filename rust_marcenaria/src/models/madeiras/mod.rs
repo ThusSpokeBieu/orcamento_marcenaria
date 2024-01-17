@@ -2,6 +2,7 @@ use std::io::{Error, ErrorKind};
 
 use serde::{Serialize, Deserialize};
 use utoipa::ToSchema;
+use rayon::prelude::*;
 
 use crate::utils::str_utils;
 
@@ -13,10 +14,8 @@ pub enum Madeira {
 
 #[derive(Debug, Clone, Serialize, Deserialize, ToSchema)]
 pub struct MadeiraInfo {
-  nome: &'static str,
-  preco_base: &'static str,
-  #[serde(skip)]
-  preco_base_valor: f64,
+  pub nome: &'static str,
+  pub preco_base: &'static str,
 }
 
 impl Madeira {
@@ -34,17 +33,14 @@ impl Madeira {
       Madeira::Pinho => MadeiraInfo {
         nome: "Pinho",
         preco_base: "R$ 0,10",
-        preco_base_valor: 0.10,
       },
       Madeira::Carvalho => MadeiraInfo {
         nome: "Carvalho",
         preco_base: "R$ 0,30",
-        preco_base_valor: 0.30,
       },
       Madeira::Ebano => MadeiraInfo {
         nome: "Ebano",
         preco_base: "R$ 5,00",
-        preco_base_valor: 5.00,
       },
     }
   }
@@ -55,5 +51,13 @@ impl Madeira {
       Madeira::Carvalho.get_info(),
       Madeira::Ebano.get_info(),
     ]
+  }
+
+  pub fn get_preco(&self) -> f64 {
+    match self {
+      Madeira::Pinho { .. } => 0.10,
+      Madeira::Carvalho { .. } => 0.30,
+      Madeira::Ebano { .. } => 5.00,
+    }
   }
 }

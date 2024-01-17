@@ -3,7 +3,7 @@ mod exceptions;
 mod models;
 mod utils;
 
-use ntex::web::{self, App, route};
+use ntex::{web::{self, App, route}, util::PoolId, http, time::Seconds};
 
 #[web::get("/")]
 async fn index() -> &'static str {
@@ -13,15 +13,27 @@ async fn index() -> &'static str {
 
 #[ntex::main]
 async fn main() -> std::io::Result<()> {
-  web::server(|| {
-    App::new()
-      .configure(routes::openapi::ntex_config)
-      .configure(routes::orcamento::ntex_config)
-      .default_service(route().to(routes::default))
-  })
-  .workers(8)
-  .bind(("0.0.0.0", 8080))?
+  ntex::server::build()
+    .backlog(1024)
+    .workers(num_cpus::get())
+    .bind("marcenaria", "0.0.0.0:8080", |cfg| {
+            cfg.memory_pool(PoolId::P1);
+            PoolId::P1.set_read_params(65535, 2048);
+            PoolId::P1.set_write_params(65535, 2048);
+
+            http::HttpService::build()
+                .keep_alive(http::KeepAlive::Os)
+                .client_timeout(Seconds::ZERO)
+                .headers_read_rate(Seconds::ZERO, Seconds::ZERO, 0)
+                .payload_read_rate(Seconds::ZERO, Seconds::ZERO, 0)
+                .h1(web::App::new()
+                        .configure(routes::openapi::ntex_config)
+                        .route("/materiais", web::get().to(routes::orcamento::get_materiais))
+                        .route("/geometrias", web::get().to(routes::orcamento::get_geometrias))
+                        .route("/orcamento", web::post().to(routes::orcamento::post_orcamento))
+                        .default_service(route().to(routes::default)))
+        })
+        .unwrap()
   .run()
-  .await?;
-  Ok(())
+  .await
 }

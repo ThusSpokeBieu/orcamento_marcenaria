@@ -1,10 +1,9 @@
-use ntex::{web, http::{self, header::{SERVER, CONTENT_TYPE}}, util::{BytesMut, ByteString}};
-use serde::Serialize;
-use crate::{models::madeiras::Madeira, utils::web_utils};
+use ntex::{web, http::{self, header::{SERVER, CONTENT_TYPE}, StatusCode}, util::{BytesMut, ByteString}};
+use crate::{models::{madeiras::Madeira, moveis::Movel, geometrias::geometria::Geometria, final_result::FinalResult}, utils::web_utils, exceptions::http_error::HttpError};
 
 #[utoipa::path(
   get,
-  path = "/orcamento/materiais",
+  path = "/materiais",
   responses(
     (
       status = 200,
@@ -12,8 +11,7 @@ use crate::{models::madeiras::Madeira, utils::web_utils};
       body = [MadeiraInfo])
   )
 )]
-#[web::get("/orcamento/materiais")]
-pub async fn get_materiais() -> web::HttpResponse {
+pub async fn get_materiais() -> impl web::Responder {
   let json = serde_json::to_string(&Madeira::get_all_info()).unwrap();
   let body = BytesMut::from(json);
 
@@ -24,9 +22,25 @@ pub async fn get_materiais() -> web::HttpResponse {
   response
 }
 
-#[web::get("/orcamento/geometrias")]
-pub async fn get_geometria() -> web::HttpResponse {
-  web::HttpResponse::Ok().finish()
+#[utoipa::path(
+  get,
+  path = "/geometrias",
+  responses(
+    (
+      status = 200,
+      description = "Lista de geometrias de estrutura disponíveis",
+      body = [Geometria])
+  )
+)]
+pub async fn get_geometrias() -> web::HttpResponse {
+  let json = serde_json::to_string(&Geometria::get_all_info()).unwrap();
+  let body = BytesMut::from(json);
+
+  let mut response = web::HttpResponse::with_body(http::StatusCode::OK, body.into());
+  response.headers_mut().insert(SERVER, web_utils::HDR_SERVER);
+  response.headers_mut().insert(CONTENT_TYPE, web_utils::HDR_JSON_CONTENT_TYPE);
+  
+  response
 }
 
 #[utoipa::path(
@@ -38,18 +52,31 @@ pub async fn get_geometria() -> web::HttpResponse {
         (status = 400, description = "Há algo de errado com a requisição", body = HttpError)
     )
 )]
-#[web::post("/orcamento")]
-pub async fn post_orcamento(req_body: String) -> web::HttpResponse {
-  let mut response = web::HttpResponse::Ok().body(req_body);
+pub async fn post_orcamento(req_body: web::types::Json<Movel>) -> impl web::Responder {
 
+  let result = FinalResult::from(&req_body.0);
+  let mut response = match result {
+            Ok(final_result) => {
+             let json = serde_json::to_value(&final_result).unwrap();
+
+            web::HttpResponse::Ok().json(&json)
+        },
+            Err(err) => {
+            let json = serde_json::to_value(HttpError{
+                status: StatusCode::BAD_REQUEST,
+                msg: err
+            }).unwrap();
+
+            web::HttpResponse::BadRequest().json(&json)
+                
+           }
+        };
+
+   
+  
   response.headers_mut().insert(SERVER, web_utils::HDR_SERVER);
   response.headers_mut().insert(CONTENT_TYPE, web_utils::HDR_JSON_CONTENT_TYPE);
 
   response
 }
 
-pub fn ntex_config(cfg: &mut web::ServiceConfig) {
-  cfg.service(get_materiais);
-  cfg.service(get_geometria);
-  cfg.service(post_orcamento);
-}
