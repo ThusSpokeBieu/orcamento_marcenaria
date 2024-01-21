@@ -1,0 +1,392 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Marcenaria Web - OpenAPI 3.1",
+    "description": "Essa API simula um sistema de orçamentos de uma marcenaria.",
+    "version": "1.0.11"
+  },
+  "servers": [
+    {
+      "url": "https://0.0.0.0:8888"
+    }
+  ],
+  "tags": [
+    {
+      "name": "materiais",
+      "description": "materiais disponíveis e seus preços base"
+    },
+    {
+      "name": "geometrias",
+      "description": "geometrias disponíveis e seus parâmetros"
+    },
+    {
+      "name": "orcamento",
+      "description": "endpoint para realizar o orcamento"
+    }
+  ],
+  "paths": {
+    "/materiais": {
+      "get": {
+        "tags": [
+          "materiais"
+        ],
+        "summary": "listar materiais disponíveis e seus preços",
+        "description": "Recebe uma lista dos materiais com seus respectivos nomes e preço base.",
+        "operationId": "getMateriais",
+        "responses": {
+          "200": {
+            "description": "Recebeu a lista com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MadeiraInfo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geometrias": {
+      "get": {
+        "tags": [
+          "geometrias"
+        ],
+        "summary": "listar geometrias disponíveis e seus parâmetros",
+        "description": "Recebe uma lista das geometrias com seus respectivos nomes, características e parametros",
+        "operationId": "getGeometrias",
+        "responses": {
+          "200": {
+            "description": "Recebeu a lista de geometrias com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Geometria"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orcamento": {
+      "post": {
+        "tags": [
+          "orcamento"
+        ],
+        "summary": "Faz o orcamento de um móvel.",
+        "description": "Recebe os dados dos moveis com o material e suas estruturas, retorna o orcamento completo dos preços.",
+        "operationId": "postOrcamento",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinalResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FinalResult": {
+        "type": "object",
+        "required": [
+          "tipo_movel",
+          "material",
+          "preco_total",
+          "preco_estruturas"
+        ],
+        "properties": {
+          "material": {
+            "type": "string"
+          },
+          "preco_estruturas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PrecoEstrutura"
+            }
+          },
+          "preco_total": {
+            "type": "number",
+            "format": "double"
+          },
+          "tipo_movel": {
+            "type": "string"
+          }
+        }
+      },
+      "Geometria": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "geometria"
+            ],
+            "properties": {
+              "geometria": {
+                "type": "string",
+                "enum": [
+                  "Desconhecido"
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "geometria",
+              "raio",
+              "estrutura"
+            ],
+            "properties": {
+              "geometria": {
+                "type": "string",
+                "enum": [
+                  "Esfera"
+                ]
+              },
+              "estrutura": {
+                "type": "string",
+                "examples": [
+                  "Estrutura Geometrica"
+                ]
+              },
+              "raio": {
+                "type": "string",
+                "pattern": "\\d+cm$",
+                "examples": [
+                  "13,5cm",
+                  "12,4cm"
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "lado",
+              "geometria",
+              "estrutura"
+            ],
+            "properties": {
+              "geometria": {
+                "type": "string",
+                "enum": [
+                  "Cubo"
+                ]
+              },
+              "estrutura": {
+                "type": "string",
+                "examples": [
+                  "Estrutura Geometrica"
+                ]
+              },
+              "lado": {
+                "type": "string",
+                "pattern": "\\d+cm$",
+                "examples": [
+                  "13,5cm",
+                  "12,4cm"
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "raio_base",
+              "estrutura",
+              "altura",
+              "geometria"
+            ],
+            "properties": {
+              "geometria": {
+                "type": "string",
+                "enum": [
+                  "Cilindro"
+                ]
+              },
+              "estrutura": {
+                "type": "string",
+                "examples": [
+                  "Estrutura Geometrica"
+                ]
+              },
+              "altura": {
+                "type": "string",
+                "pattern": "\\d+cm$",
+                "examples": [
+                  "13,5cm",
+                  "12,4cm"
+                ]
+              },
+              "raio_base": {
+                "type": "string",
+                "pattern": "\\d+cm$",
+                "examples": [
+                  "13,5cm",
+                  "12,4cm"
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "comprimento",
+              "estrutura",
+              "largura",
+              "altura",
+              "geometria"
+            ],
+            "properties": {
+              "geometria": {
+                "type": "string",
+                "enum": [
+                  "Paralelepipedo"
+                ]
+              },
+              "estrutura": {
+                "type": "string",
+                "examples": [
+                  "Estrutura Geometrica"
+                ]
+              },
+              "altura": {
+                "type": "string",
+                "pattern": "\\d+cm$",
+                "examples": [
+                  "13,5cm",
+                  "12,4cm"
+                ]
+              },
+              "comprimento": {
+                "type": "string",
+                "pattern": "\\d+cm$",
+                "examples": [
+                  "13,5cm",
+                  "12,4cm"
+                ]
+              },
+              "largura": {
+                "type": "string",
+                "pattern": "\\d+cm$",
+                "examples": [
+                  "13,5cm",
+                  "12,4cm"
+                ]
+              }
+            }
+          }
+        ],
+        "discriminator": {
+          "propertyName": "geometria"
+        }
+      },
+      "HttpError": {
+        "type": "object",
+        "required": [
+          "msg"
+        ],
+        "properties": {
+          "msg": {
+            "type": "string"
+          }
+        }
+      },
+      "MadeiraInfo": {
+        "type": "object",
+        "required": [
+          "nome",
+          "preco_base"
+        ],
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "preco_base": {
+            "type": "string"
+          }
+        }
+      },
+      "Movel": {
+        "type": "object",
+        "required": [
+          "movel",
+          "material",
+          "geometrias"
+        ],
+        "properties": {
+          "geometrias": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Geometria"
+            }
+          },
+          "material": {
+            "type": "string",
+            "enum": [
+              "Pinho",
+              "Carvalho",
+              "Ebano"
+            ]
+          },
+          "movel": {
+            "type": "string"
+          }
+        }
+      },
+      "PrecoEstrutura": {
+        "type": "object",
+        "required": [
+          "estrutura",
+          "geometria",
+          "preco"
+        ],
+        "properties": {
+          "estrutura": {
+            "type": "string"
+          },
+          "geometria": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    }
+  }
+}

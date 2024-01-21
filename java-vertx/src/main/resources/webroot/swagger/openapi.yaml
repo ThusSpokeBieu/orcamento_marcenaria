@@ -1,0 +1,216 @@
+openapi: 3.0.1
+info:
+  title: Marcenaria Web - OpenAPI 3.1
+  description: |-
+    Essa API simula um sistema de orçamentos de uma marcenaria.
+
+  version: 1.0.11
+servers:
+  - url: http://localhost:8888
+tags:
+  - name: materiais
+    description: materiais disponíveis e seus preços base
+  - name: geometrias
+    description: geometrias disponíveis e seus parâmetros
+  - name: orcamento
+    description: endpoint para realizar o orcamento
+paths:
+  /materiais:
+    get:
+      tags:
+        - materiais
+      summary: listar materiais disponíveis e seus preços
+      description: Recebe uma lista dos materiais com seus respectivos nomes e preço base.
+      operationId: getMateriais
+      responses:
+        '200':
+          description: Recebeu a lista com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MadeiraInfo'
+  
+  /geometrias:
+    get:
+      tags:
+        - geometrias
+      summary: listar geometrias disponíveis e seus parâmetros
+      description: Recebe uma lista das geometrias com seus respectivos nomes, características e parametros
+      operationId: getGeometrias
+      responses:
+        '200':
+          description: Recebeu a lista de geometrias com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  anyOf:
+                    - $ref: '#/components/schemas/Esfera'
+                    - $ref: '#/components/schemas/Cubo'
+                    - $ref: '#/components/schemas/Cilindro'
+                    - $ref: '#/components/schemas/Paralelepipedo'
+
+  /orcamento:
+    post:
+      tags:
+        - orcamento
+      summary: Faz o orcamento de um móvel.
+      description: Recebe os dados dos moveis com o material e suas estruturas, retorna o orcamento completo dos preços.
+      operationId: postOrcamento
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movel'
+              type: object
+
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinalResult'
+        '404':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpError'
+components:
+  schemas:
+    FinalResult:
+      type: object
+      required:
+        - tipo_movel
+        - material
+        - preco_total
+        - preco_estruturas
+      properties:
+        material:
+          type: string
+        preco_estruturas:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrecoEstrutura'
+        preco_total:
+          type: string
+          format: double
+        tipo_movel:
+          type: string
+    Geometria:
+      type: object
+      required:
+        - geometria
+        - estrutura
+      properties:
+        geometria:
+          type: string
+        estrutura:
+          type: string
+      discriminator:
+        propertyName: geometria
+        mapping:
+          esfera: '#/components/schemas/Esfera'
+          cubo: '#/components/schemas/Cubo'
+          cilindro: '#/components/schemas/Cilindro'
+          paralelepipedo: '#/components/schemas/Paralelepipedo'
+    Esfera:
+      allOf:
+        - $ref: '#/components/schemas/Geometria'
+        - type: object
+          required:
+            - raio
+          properties:
+            raio:
+              type: string
+    Cubo:
+      allOf:
+        - $ref: '#/components/schemas/Geometria'
+        - type: object
+          required:
+            - lado
+          properties:
+            lado:
+              type: string
+    Cilindro:
+      allOf:
+        - $ref: '#/components/schemas/Geometria'
+        - type: object
+          required:
+            - raio_base
+            - altura
+          properties:
+            altura:
+              type: string
+            raio_base:
+              type: string
+    Paralelepipedo:
+      allOf:
+        - $ref: '#/components/schemas/Geometria'
+        - type: object
+          required:
+            - comprimento
+            - largura
+            - altura
+          properties:
+            altura:
+              type: string
+            comprimento:
+              type: string
+            largura:
+              type: string
+    HttpError:
+      type: object
+      required:
+        - msg
+      properties:
+        msg:
+          type: string
+    MadeiraInfo:
+      type: object
+      required:
+        - nome
+        - preco_base
+      properties:
+        nome:
+          type: string
+        preco_base:
+          type: string
+    Movel:
+      type: object
+      required:
+        - movel
+        - material
+        - geometrias
+      properties:
+        geometrias:
+          type: array
+          items:
+            $ref: '#/components/schemas/Geometria'
+        material:
+          type: string
+          enum:
+            - Pinho
+            - Carvalho
+            - Ebano
+        movel:
+          type: string
+    PrecoEstrutura:
+      type: object
+      required:
+        - estrutura
+        - geometria
+        - preco
+      properties:
+        estrutura:
+          type: string
+        geometria:
+          type: string
+        preco:
+          type: string
+          format: double
+    

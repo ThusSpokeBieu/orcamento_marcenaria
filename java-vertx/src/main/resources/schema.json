@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "geometrias": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "estrutura": {
+            "type": "string"
+          },
+          "geometria": {
+            "type": "string",
+            "pattern": "^(?i)(paralelep[ií]pedo|cil[ií]ndro|esfera|cubo)$"
+          },
+          "raio": {"type": "string", "pattern": "^\\d+cm$"},
+          "lado": {"type": "string", "pattern": "^\\d+cm$"},
+          "altura": {"type": "string", "pattern": "^\\d+cm$"},
+          "raio_base": {"type": "string", "pattern": "^\\d+cm$"},
+          "comprimento": {"type": "string", "pattern": "^\\d+cm$"},
+          "largura": {"type": "string", "pattern": "^\\d+cm$"}
+        },
+        "required": ["geometria", "estrura"]
+      }
+    },
+    "material": {
+      "type": "string",
+      "pattern": "^(?i)(pinho|carvalho|[eé]bano)$"
+    },
+    "movel": {"type": "string"}
+  },
+  "required": ["geometrias", "material", "movel"]
+}
