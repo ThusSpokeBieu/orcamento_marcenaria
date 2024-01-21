@@ -1,0 +1,36 @@
+[package]
+name = "rust_marcenaria"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ntex = { version = "1.0.0", features = ["tokio"] }
+ntex-bytes = { version = "0.1.21", features = ["simd"] }
+serde = { version = "1.0.195", features = ["derive"] }
+serde_json = "1.0.111"
+snmalloc-rs = "0.3.4"
+tok_io = { version = "1", package = "tokio" }
+unicase = "2.7.0"
+unicode-normalization = "0.1.22"
+uom = { version = "0.35.0", features = ["use_serde"] }
+utoipa = "4.2.0"
+utoipa-swagger-ui = "6.0.0"
+num_cpus = "1.16"
+smallvec = "1.11"
+buf-min = { version = "0.7", features = ["ntex-bytes"] }
+nanorand = { version = "0.7", default-features = false, features = [
+  "std",
+  "wyrand",
+  "tls",
+] }
+atoi = "2.0"
+rayon = "1.8.1"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+panic = 'abort'
+lto = "thin"
+debug = false
+incremental = false
+overflow-checks = false
