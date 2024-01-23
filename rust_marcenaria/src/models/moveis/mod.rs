@@ -9,5 +9,3 @@ pub struct Movel {
   pub material: String,
   pub geometrias: Vec<Geometria>,
 }
-
-

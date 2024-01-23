@@ -10,24 +10,20 @@ use ntex::{
   web::{self, route},
   util::PoolId,
   http,
-  time::Seconds,
 };
 
 #[ntex::main]
 async fn main() -> std::io::Result<()> {
   ntex::server::build()
-    .backlog(1024)
-    .workers(num_cpus::get())
-    .bind("marcenaria", "0.0.0.0:8080", |cfg| {
+    .backlog(16 * 2048)
+    .workers(num_cpus::get() * 2)
+    .bind("marcenaria", "localhost:8080", |cfg| {
       cfg.memory_pool(PoolId::P1);
-      PoolId::P1.set_read_params(65535, 2048);
-      PoolId::P1.set_write_params(65535, 2048);
+      PoolId::P1.set_read_params(65535 * 16, 2048 * 16);
+      PoolId::P1.set_write_params(65535 * 16, 2048 * 16);
 
       http::HttpService::build()
         .keep_alive(http::KeepAlive::Os)
-        .client_timeout(Seconds::ZERO)
-        .headers_read_rate(Seconds::ZERO, Seconds::ZERO, 0)
-        .payload_read_rate(Seconds::ZERO, Seconds::ZERO, 0)
         .h1(
           web::App::new()
             .configure(routes::openapi::ntex_config)
@@ -47,6 +43,10 @@ async fn main() -> std::io::Result<()> {
         )
     })
     .unwrap()
+    .on_worker_start(|_| async move {
+      println!("🚀 Worker is listening port 8080");
+      Ok::<_, std::io::Error>(())
+    })
     .run()
     .await
 }

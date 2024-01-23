@@ -8,6 +8,7 @@ import github.com.marcenariaspring.models.moveis.Orcamento;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 
@@ -31,10 +32,10 @@ public class MarcenariaController implements MarcenariaApi {
   }
 
 
-  @Cacheable("orcamento")
+  @CachePut(key = "#movel.getMovel", cacheNames = "orcamento")
   public Mono<ResponseEntity<Orcamento>> postOrcamento( @Valid
-                                                @RequestBody
-                                               final Mono<Movel> movel) {
-    return movel.map(Orcamento::from).map(o -> ResponseEntity.ok().body(o));
+                                                @RequestBody Movel movel) {
+    return Mono.fromSupplier(() -> Orcamento.from(movel))
+               .map(o -> ResponseEntity.ok().body(o));
   }
 }

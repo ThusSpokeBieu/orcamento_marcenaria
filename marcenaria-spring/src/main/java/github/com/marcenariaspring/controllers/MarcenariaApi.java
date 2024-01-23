@@ -42,5 +42,5 @@ public interface MarcenariaApi {
                produces = APPLICATION_JSON_VALUE)
   @Operation(summary = "Faz o orçamento do móvel")
   public Mono<ResponseEntity<Orcamento>> postOrcamento(@Valid @RequestBody
-    final Mono<Movel> movel);
+    final Movel movel);
 }

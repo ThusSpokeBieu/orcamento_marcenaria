@@ -2,7 +2,7 @@ use std::io::{Error, ErrorKind};
 
 use serde::{Serialize, Deserialize};
 use utoipa::ToSchema;
-use rayon::prelude::*;
+
 
 use crate::utils::str_utils;
 

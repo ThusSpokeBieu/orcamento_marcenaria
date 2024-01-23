@@ -15,9 +15,8 @@ import java.util.concurrent.TimeUnit;
 public class App  {
     public final static int PORT = 8888;
     private final static Logger logger = LoggerFactory.getLogger(App.class.getName());
-
     public static void main( String[] args ) throws Exception {
-        int eventLoopPoolSize = 1;// VertxOptions.DEFAULT_EVENT_LOOP_POOL_SIZE;
+        int eventLoopPoolSize = VertxOptions.DEFAULT_EVENT_LOOP_POOL_SIZE;
 
         Vertx vertx = Vertx.vertx(
           new VertxOptions()
