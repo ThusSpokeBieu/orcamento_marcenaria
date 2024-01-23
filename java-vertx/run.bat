@@ -5,4 +5,4 @@ java -Xms2G -Xmx2G -server -XX:+UseNUMA -XX:+UseZGC ^
     -Dvertx.threadChecks=false -Dvertx.disableContextTimings=true ^
     -Dvertx.disableTCCL=true -Dvertx.disableHttpHeadersValidation=true ^
     -Dio.netty.buffer.checkBounds=false -Dio.netty.buffer.checkAccessible=false ^
-    -cp your-classpath;your-jar.jar your.main.Class
+    -cp target/java-vertx-1.0-SNAPSHOT.jar github.gmess.App

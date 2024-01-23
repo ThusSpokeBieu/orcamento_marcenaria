@@ -50,6 +50,8 @@ public class RouteVerticle extends AbstractVerticle {
       router.route("/swagger*")
             .handler(StaticHandler.create("src/main/resources/webroot/swagger/"));
 
+      logger.info("\"\uD83D\uDE80 Servidor iniciado na porta: " + App.PORT + "-> Acesse http://localhost:" + App.PORT);
+
       server
         .requestHandler(router)
             .listen(App.PORT);
