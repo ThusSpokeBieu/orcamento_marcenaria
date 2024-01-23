@@ -1,0 +1,422 @@
+{	
+    "openapi": "3.0.1",
+    "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Generated server url"
+        }
+    ],
+    "paths": {
+        "/orcamento": {
+            "post": {
+                "tags": [
+                    "Orcamento"
+                ],
+                "summary": "Faz o orçamento do móvel",
+                "operationId": "postOrcamento",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Movel"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Orcamento"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notification"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/materiais": {
+            "get": {
+                "tags": [
+                    "Materiais"
+                ],
+                "summary": "Recebe uma lista com todos materiais disponíveis",
+                "operationId": "getMateriais",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/components/schemas/Material"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/Material"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notification"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/geometrias": {
+            "get": {
+                "tags": [
+                    "Geometrias"
+                ],
+                "summary": "Recebe uma lista com todas geometrias disponíveis",
+                "operationId": "getGeometrias",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/components/schemas/Cilindro"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/Cubo"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/Esfera"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/Paralelepipedo"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notification"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Notification": {
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "Cilindro": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Geometria"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "estrutura": {
+                                "type": "string",
+                                "description": "A estrutura da Geometria",
+                                "example": "Estrutura Cilindrica"
+                            },
+                            "altura": {
+                                "type": "string",
+                                "description": "Tamanho da altura do cilindro em centimetros",
+                                "example": "1.0cm"
+                            },
+                            "raio_base": {
+                                "type": "string",
+                                "description": "Tamanho do raio base do cilindro em centimetros",
+                                "example": "1.0cm"
+                            },
+                            "geometria": {
+                                "type": "string",
+                                "description": "Tipo da geometria",
+                                "example": "Cilindro"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Cubo": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Geometria"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "estrutura": {
+                                "type": "string",
+                                "description": "A estrutura da Geometria",
+                                "example": "Estrutura Cubica"
+                            },
+                            "lado": {
+                                "type": "string",
+                                "description": "Tamanho do cubo em centimetros",
+                                "example": "1.0cm"
+                            },
+                            "geometria": {
+                                "type": "string",
+                                "description": "Tipo da geometria",
+                                "example": "Cubo"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Esfera": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Geometria"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "estrutura": {
+                                "type": "string",
+                                "description": "A estrutura da Geometria",
+                                "example": "Estrutura Esférica"
+                            },
+                            "raio": {
+                                "type": "string",
+                                "description": "Tamanho do raio em centimetros da esfera",
+                                "example": "1.0cm"
+                            },
+                            "geometria": {
+                                "type": "string",
+                                "description": "Tipo da geometria",
+                                "example": "Esfera"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Geometria": {
+                "type": "object",
+                "properties": {
+                    "geometria": {
+                        "type": "string"
+                    },
+                    "estrutura": {
+                        "type": "string"
+                    }
+                },
+                "discriminator": {
+                    "propertyName": "geometria"
+                }
+            },
+            "Material": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Material"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "nome": {
+                                "type": "string"
+                            },
+                            "preco_base": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Movel": {
+                "required": [
+                    "movel"
+                ],
+                "type": "object",
+                "properties": {
+                    "movel": {
+                        "type": "string",
+                        "description": "nome do movel",
+                        "default": "cadeira"
+                    },
+                    "material": {
+                        "type": "object",
+                        "description": "Tipo do material",
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Material"
+                            }
+                        ],
+                        "default": "pinho"
+                    },
+                    "geometrias": {
+                        "type": "array",
+                        "items": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/components/schemas/Cilindro"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Cubo"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Esfera"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/Paralelepipedo"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "Paralelepipedo": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Geometria"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "estrutura": {
+                                "type": "string",
+                                "description": "A estrutura da Geometria",
+                                "example": "Estrutura de Paralelepipedo"
+                            },
+                            "altura": {
+                                "type": "string",
+                                "description": "Tamanho da altura do paralelepipedo em centimetros",
+                                "example": "1.0cm"
+                            },
+                            "comprimento": {
+                                "type": "string",
+                                "description": "Tamanho do comprimento do paralelepipedo em centimetros",
+                                "example": "1.0cm"
+                            },
+                            "largura": {
+                                "type": "string",
+                                "description": "Tamanho da largura do paralelepipedo em centimetros",
+                                "example": "1.0cm"
+                            },
+                            "geometria": {
+                                "type": "string",
+                                "description": "Tipo da geometria",
+                                "example": "Paralelepipedo"
+                            }
+                        }
+                    }
+                ]
+            },
+            "EstruturaValor": {
+                "type": "object",
+                "properties": {
+                    "estrutura": {
+                        "type": "string",
+                        "description": "O nome da estrutura",
+                        "example": "perna dianteira esquerda"
+                    },
+                    "geometria": {
+                        "type": "string",
+                        "description": "Tipo da geometria",
+                        "example": "cilindro"
+                    },
+                    "valor": {
+                        "type": "string"
+                    }
+                },
+                "description": "Estruturas e seus valores"
+            },
+            "Orcamento": {
+                "type": "object",
+                "properties": {
+                    "movel": {
+                        "type": "string",
+                        "description": "Nome do móvel",
+                        "example": "R$50,00"
+                    },
+                    "material": {
+                        "type": "string",
+                        "description": "Material do orçamento",
+                        "example": "R$50,00"
+                    },
+                    "estruturas": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "description": "Estruturas e seus valores",
+                        "items": {
+                            "$ref": "#/components/schemas/EstruturaValor"
+                        }
+                    },
+                    "preco_total": {
+                        "type": "string",
+                        "description": "Soma dos valores das estruturas",
+                        "example": "R$50,00"
+                    }
+                }
+            }
+        }
+    }
+}
