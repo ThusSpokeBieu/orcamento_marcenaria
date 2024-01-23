@@ -1,3 +1,16 @@
+# Ranking de performance
+
+---------------------------------------------------------------------------------
+| Posição |              Api                        | Req. p/ Sec | Req. Totais |
+| ------- | --------------------------------------- | ----------- | ----------- |
+| 1       | Ronaldo - Javascript (uWebSockets)      | 4219.34     | 253196      |
+| 2       | Gabriel - Go (fiber)                    | 4210.38     | 252656      |
+| 3       | Gabriel - Rust (ntex)                   | 3837.64     | 230300      |
+| 4       | Gabriel - Java (vertx)                  | 3685.79     | 221244      |
+| 5       | Emmanuel - Java (spring) (???) ladrão   | 2144.88 (?) | 128742 (?)  |
+| 6       | Gabriel - Java (spring)                 | 1978.82     | 118804      |        
+---------------------------------------------------------------------------------
+
 # Orçamento Marcenaria
 
 PRAZO: Terça-Feira (23/01/2024)
