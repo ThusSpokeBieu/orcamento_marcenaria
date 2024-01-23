@@ -1,21 +1,22 @@
-package materiais
+package models
 
 import (
 	"errors"
+	"fmt"
 	"marcenaria/utils"
 )
 
 type Material struct {
-	Nome  string  `json:"nome"`
-	Preco float64 `json:"preco"`
+	Nome  string `json:"nome"`
+	Preco string `json:"preco_base"`
 }
 
 var Materiais = make(map[string]Material)
 
 var (
-	Pinho    = Material{"Pinho", 0.10}
-	Carvalho = Material{"Carvalho", 0.30}
-	Ebano    = Material{"Ebano", 5.00}
+	Pinho    = Material{"Pinho", "R$0,10"}
+	Carvalho = Material{"Carvalho", "R$0,30"}
+	Ebano    = Material{"Ebano", "R$5,00"}
 )
 
 func init() {
@@ -29,7 +30,8 @@ func GetMaterial(nome string) (Material, error) {
 
 	material, ok := Materiais[nome]
 	if !ok {
-		return Material{}, errors.New("Material não encontrado")
+		errMessage := fmt.Sprintf("Material %s não é válido escolha entre: Pinho, Carvalho e Ébano", nome)
+		return Material{}, errors.New(errMessage)
 	}
 
 	return material, nil

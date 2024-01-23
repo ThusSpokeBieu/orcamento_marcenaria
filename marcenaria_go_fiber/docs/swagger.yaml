@@ -1,0 +1,14 @@
+basePath: /
+host: localhost:8080
+info:
+  contact:
+    name: API Support
+  description: Uma api de orçamento de marcenaria gerada com Go Fiber
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Marcenaria API
+  version: "1.0"
+paths: {}
+swagger: "2.0"
