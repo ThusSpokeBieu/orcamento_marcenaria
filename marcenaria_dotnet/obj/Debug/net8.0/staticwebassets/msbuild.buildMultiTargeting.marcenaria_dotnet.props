@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\marcenaria_dotnet.props" />
+</Project>
