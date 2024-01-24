@@ -25,6 +25,7 @@ nanorand = { version = "0.7", default-features = false, features = [
 ] }
 atoi = "2.0"
 rayon = "1.8.1"
+simd-json = "0.13.8"
 
 [profile.release]
 opt-level = 3
