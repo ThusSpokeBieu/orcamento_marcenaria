@@ -1,10 +1,6 @@
 use ntex::{
   web,
-  http::{
-    self,
-    header::{SERVER, CONTENT_TYPE},
-    StatusCode,
-  },
+  http::{self, StatusCode},
   util::BytesMut,
 };
 use crate::{
@@ -12,7 +8,6 @@ use crate::{
     madeiras::Madeira, moveis::Movel, geometrias::geometria::Geometria,
     final_result::FinalResult,
   },
-  utils::web_utils,
   exceptions::http_error::HttpError,
 };
 
@@ -27,17 +22,10 @@ use crate::{
   )
 )]
 pub async fn get_materiais() -> impl web::Responder {
-  let json = serde_json::to_string(&Madeira::get_all_info()).unwrap();
+  let json = simd_json::to_string(&Madeira::get_all_info()).unwrap();
   let body = BytesMut::from(json);
 
-  let mut response =
-    web::HttpResponse::with_body(http::StatusCode::OK, body.into());
-  response.headers_mut().insert(SERVER, web_utils::HDR_SERVER);
-  response
-    .headers_mut()
-    .insert(CONTENT_TYPE, web_utils::HDR_JSON_CONTENT_TYPE);
-
-  response
+  web::HttpResponse::with_body(http::StatusCode::OK, body.into())
 }
 
 #[utoipa::path(
@@ -51,17 +39,10 @@ pub async fn get_materiais() -> impl web::Responder {
   )
 )]
 pub async fn get_geometrias() -> web::HttpResponse {
-  let json = serde_json::to_string(&Geometria::get_all_info()).unwrap();
+  let json = simd_json::to_string(&Geometria::get_all_info()).unwrap();
   let body = BytesMut::from(json);
 
-  let mut response =
-    web::HttpResponse::with_body(http::StatusCode::OK, body.into());
-  response.headers_mut().insert(SERVER, web_utils::HDR_SERVER);
-  response
-    .headers_mut()
-    .insert(CONTENT_TYPE, web_utils::HDR_JSON_CONTENT_TYPE);
-
-  response
+  web::HttpResponse::with_body(http::StatusCode::OK, body.into())
 }
 
 #[utoipa::path(
@@ -74,12 +55,24 @@ pub async fn get_geometrias() -> web::HttpResponse {
     )
 )]
 pub async fn post_orcamento(
-  req_body: web::types::Json<Movel>,
+  mut body: web::types::Payload,
 ) -> impl web::Responder {
-  let result = FinalResult::from(&req_body.0);
+  let mut bytes = BytesMut::new();
+  while let Some(item) = body.0.recv().await {
+    bytes.extend_from_slice(&item.unwrap());
+  }
+
+  let movel: Movel = simd_json::from_slice(&mut bytes).unwrap();
+
+  let result = FinalResult::from(&movel);
 
   match result {
-    Ok(final_result) => web::HttpResponse::Ok().json(&final_result),
+    Ok(final_result) => {
+      let json = simd_json::to_string(&final_result).unwrap();
+      let body = BytesMut::from(json);
+
+      web::HttpResponse::with_body(http::StatusCode::OK, body.into())
+    }
     Err(err) => web::HttpResponse::BadRequest().json(&HttpError {
       status: StatusCode::BAD_REQUEST,
       msg: err,
