@@ -6,6 +6,8 @@ ADD ./ /rust_marcenaria
 WORKDIR /rust_marcenaria
 
 RUN cargo clean
+RUN rustup self update
+RUN rustup update
 RUN RUSTFLAGS="-C target-cpu=native" cargo build --release
 
 EXPOSE 8080

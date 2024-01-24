@@ -1,34 +1,34 @@
-use serde::{Serialize, Deserialize};
+use serde::Serialize;
 use utoipa::ToSchema;
 use crate::models::moveis::Movel;
 
 use super::{geometrias::geometria::Geometria, madeiras::Madeira};
 
-#[derive(Clone, Debug, Serialize, Deserialize, ToSchema)]
-pub struct FinalResult {
-  pub tipo_movel: String,
-  pub material: String,
+#[derive(Serialize, ToSchema)]
+pub struct FinalResult<'a> {
+  pub tipo_movel: &'a str,
+  pub material: &'a str,
   #[serde(serialize_with = "crate::utils::serializer_utils::serialize_real")]
   pub preco_total: f64,
-  pub preco_estruturas: Vec<PrecoEstrutura>,
+  pub preco_estruturas: Vec<PrecoEstrutura<'a>>,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, ToSchema)]
-pub struct PrecoEstrutura {
-  pub estrutura: String,
-  pub geometria: String,
+#[derive(Serialize, ToSchema)]
+pub struct PrecoEstrutura<'a> {
+  pub estrutura: &'a str,
+  pub geometria: &'a str,
   #[serde(serialize_with = "crate::utils::serializer_utils::serialize_real")]
   pub preco: f64,
 }
 
-impl FinalResult {
-  pub fn from(movel: &Movel) -> Result<FinalResult, String> {
+impl<'a> FinalResult<'a> {
+  pub fn from(movel: &'a Movel) -> Result<FinalResult<'a>, String> {
     let precos = PrecoEstrutura::from(&movel.geometrias, &movel.material);
 
     match precos {
       Ok(precos_ok) => Ok(FinalResult {
-        tipo_movel: movel.movel.clone(),
-        material: movel.material.clone(),
+        tipo_movel: &movel.movel,
+        material: &movel.material,
         preco_total: precos_ok.iter().map(|p| p.preco).sum(),
         preco_estruturas: precos_ok,
       }),
@@ -38,11 +38,11 @@ impl FinalResult {
   }
 }
 
-impl PrecoEstrutura {
+impl<'a> PrecoEstrutura<'a> {
   pub fn from(
-    estruturas: &[Geometria],
-    material: &str,
-  ) -> Result<Vec<PrecoEstrutura>, String> {
+    estruturas: &'a [Geometria],
+    material: &'a str,
+  ) -> Result<Vec<PrecoEstrutura<'a>>, String> {
     let madeira = Madeira::from_str(material).map_err(|_| {
       format!(
         "{} não é um material válido, escolha entre Ébano, Carvalho e Pinho.",
@@ -54,8 +54,8 @@ impl PrecoEstrutura {
       estruturas
         .iter()
         .map(|estrutura| PrecoEstrutura {
-          estrutura: estrutura.get_estrutura().unwrap().to_string(),
-          geometria: String::from(estrutura.get_name().unwrap()),
+          estrutura: estrutura.get_estrutura().unwrap(),
+          geometria: estrutura.get_name().unwrap(),
           preco: madeira.get_preco() * estrutura.get_area().unwrap(),
         })
         .collect(),
