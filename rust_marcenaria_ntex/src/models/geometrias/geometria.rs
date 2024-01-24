@@ -1,11 +1,11 @@
 use std::f64::consts::PI;
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use utoipa::ToSchema;
 
 use crate::utils::str_utils;
 
-#[derive(Clone, Debug, Serialize, Deserialize, ToSchema)]
+#[derive(Serialize, Deserialize, ToSchema)]
 #[serde(tag = "geometria")]
 pub enum Geometria {
   #[serde(alias = "esfera", alias = "Esfera", alias = "ESFERA")]
@@ -72,7 +72,7 @@ impl Geometria {
 }
 
 impl Geometria {
-  pub fn get_estrutura(&self) -> Option<&String> {
+  pub fn get_estrutura(&self) -> Option<&str> {
     match self {
       Geometria::Esfera { estrutura, .. } => Some(estrutura),
       Geometria::Cubo { estrutura, .. } => Some(estrutura),
@@ -171,28 +171,28 @@ impl Geometria {
         let c = str_utils::convert_to_f64(comprimento).map_err(|_| {
           format!(
             "O paralelepípedo {} está com o valor do comprimento inválido: {}",
-            estrutura, comprimento
+            *estrutura, *comprimento
           )
         })?;
 
         let l = str_utils::convert_to_f64(largura).map_err(|_| {
           format!(
             "O paralelepípedo {} está com o valor da largura inválido: {}",
-            estrutura, largura
+            *estrutura, *largura
           )
         })?;
 
         let a = str_utils::convert_to_f64(altura).map_err(|_| {
           format!(
             "O paralelepípedo {} está com o valor da altura inválido: {}",
-            estrutura, altura
+            *estrutura, *altura
           )
         })?;
 
         if c <= 0.0 || l <= 0.0 || a <= 0.0 {
           let err_message = format!(
             "O paralelepípedo {} deve ter o comprimento, largura e altura positivos, comprimento: {}, altura: {} ou largura {} é inválido",
-            estrutura, comprimento, largura, altura
+            *estrutura, *comprimento, *largura, *altura
         );
           Err(err_message)
         } else {

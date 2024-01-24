@@ -7,17 +7,19 @@ mod models;
 mod utils;
 
 use ntex::{
-  web::{self, route},
-  util::PoolId,
   http,
+  util::PoolId,
+  web::{self, route},
 };
+
+const HOST: &str = "127.0.0.1:8080";
 
 #[ntex::main]
 async fn main() -> std::io::Result<()> {
   ntex::server::build()
     .backlog(16 * 2048)
     .workers(num_cpus::get() * 2)
-    .bind("marcenaria", "localhost:8080", |cfg| {
+    .bind("Marcenaria", HOST, |cfg| {
       cfg.memory_pool(PoolId::P1);
       PoolId::P1.set_read_params(65535 * 16, 2048 * 16);
       PoolId::P1.set_write_params(65535 * 16, 2048 * 16);
@@ -44,7 +46,7 @@ async fn main() -> std::io::Result<()> {
     })
     .unwrap()
     .on_worker_start(|_| async move {
-      println!("🚀 Worker is listening port 8080");
+      println!("🚀 Worker is listening to {}", HOST);
       Ok::<_, std::io::Error>(())
     })
     .run()

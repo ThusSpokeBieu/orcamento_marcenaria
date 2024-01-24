@@ -1,0 +1,26 @@
+[package]
+name = "rust_marcenaria_actix"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix = "0.13.1"
+actix-codec = "0.5.1"
+actix-http = "3.5.1"
+actix-rt = "2.9.0"
+actix-server = "2.3.0"
+actix-service = "2.0.2"
+actix-web = "4.4.1"
+env_logger = "0.11.0"
+num_cpus = "1.16.0"
+serde = { version = "1.0.195", features = ["derive"] }
+serde_json = "1.0.111"
+snmalloc-rs = "0.3.4"
+tokio = { version = "1.35.1", features = ["full"] }
+unicode-normalization = "0.1.22"
+utoipa = { version = "4.2.0", features = ["actix_extras"] }
+utoipa-rapidoc = { version = "3.0.0", features = ["actix-web"] }
+utoipa-redoc = { version = "3.0.0", features = ["actix-web"] }
+utoipa-swagger-ui = { version = "6.0.0", features = ["actix-web"] }
