@@ -125,13 +125,15 @@
         <dependency>
           <groupId>io.vertx</groupId>
           <artifactId>vertx-io_uring-incubator</artifactId>
-          <version>${stack.version}</version>
+          <version>4.5.1</version>
+          <scope>compile</scope>
         </dependency>
         <dependency>
           <groupId>io.netty.incubator</groupId>
           <artifactId>netty-incubator-transport-native-io_uring</artifactId>
-          <version>${netty.io_uring.version}</version>
+          <version>0.0.21.Final</version>
           <classifier>linux-x86_64</classifier>
+          <scope>compile</scope>
         </dependency>
       </dependencies>
     </profile>

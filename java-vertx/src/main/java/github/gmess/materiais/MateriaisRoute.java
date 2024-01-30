@@ -4,9 +4,8 @@ import github.gmess.RouteVerticle;
 import github.gmess.http.HttpConst;
 import io.vertx.core.impl.logging.Logger;
 import io.vertx.core.impl.logging.LoggerFactory;
-import io.vertx.ext.web.openapi.Operation;
-import io.vertx.ext.web.openapi.RouterBuilder;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.openapi.RouterBuilder;
 
 public class MateriaisRoute {
   private final static Logger logger = LoggerFactory.getLogger(RouteVerticle.class.getName());

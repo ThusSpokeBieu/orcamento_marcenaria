@@ -6,7 +6,7 @@ use ntex::{
 use crate::{
   models::{
     madeiras::Madeira, moveis::Movel, geometrias::geometria::Geometria,
-    final_result::FinalResult,
+    final_result::{self, FinalResult},
   },
   exceptions::http_error::HttpError,
 };
@@ -55,24 +55,12 @@ pub async fn get_geometrias() -> web::HttpResponse {
     )
 )]
 pub async fn post_orcamento(
-  mut body: web::types::Payload,
+  movel: web::types::Json<Movel>,
 ) -> impl web::Responder {
-  let mut bytes = BytesMut::new();
-  while let Some(item) = body.0.recv().await {
-    bytes.extend_from_slice(&item.unwrap());
-  }
-
-  let movel: Movel = simd_json::from_slice(&mut bytes).unwrap();
-
   let result = FinalResult::from(&movel);
 
   match result {
-    Ok(final_result) => {
-      let json = simd_json::to_string(&final_result).unwrap();
-      let body = BytesMut::from(json);
-
-      web::HttpResponse::with_body(http::StatusCode::OK, body.into())
-    }
+    Ok(final_result) => web::HttpResponse::Ok().json(&final_result),
     Err(err) => web::HttpResponse::BadRequest().json(&HttpError {
       status: StatusCode::BAD_REQUEST,
       msg: err,

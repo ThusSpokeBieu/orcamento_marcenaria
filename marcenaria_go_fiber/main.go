@@ -42,8 +42,7 @@ func main() {
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "*",
 		AllowHeaders: "*",
-		AllowMethods: "*",
-	}))
+		AllowMethods: "*"}))
 
 	app.Use(cache.New(cache.Config{
 		ExpirationGenerator: func(c *fiber.Ctx, cfg *cache.Config) time.Duration {
