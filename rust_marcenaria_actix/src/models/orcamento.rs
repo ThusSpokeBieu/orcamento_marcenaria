@@ -5,33 +5,33 @@ use utoipa::ToSchema;
 use super::{materiais::Material, moveis::Movel};
 
 #[derive(Serialize, ToSchema)]
-pub struct Orcamento {
-    pub movel: String,
-    pub material: String,
+pub struct Orcamento<'a> {
+    pub movel: &'a str,
+    pub material: &'a str,
     pub preco_total: f64,
-    pub estruturas: SmallVec<[EstruturaValor; 8]>,
+    pub estruturas: SmallVec<[EstruturaValor<'a>; 8]>,
 }
 
 #[derive(Serialize, ToSchema)]
-pub struct EstruturaValor {
-    pub estrutura: String,
-    pub geometria: String,
+pub struct EstruturaValor<'a> {
+    pub estrutura: &'a str,
+    pub geometria: &'a str,
     pub valor: f64,
 }
 
-impl Orcamento {
-    pub fn from(movel: &Movel) -> Result<Orcamento, std::io::Error> {
+impl<'a> Orcamento<'a> {
+    pub fn from(movel: &'a Movel) -> Result<Orcamento<'a>, std::io::Error> {
         let material = Material::from_str(&movel.material)?;
 
-        let estruturas: SmallVec<[EstruturaValor; 8]> = movel
+        let estruturas: SmallVec<[EstruturaValor<'a>; 8]> = movel
             .geometrias
             .iter()
             .map(|g| {
                 let preco = g.get_area() * material.get_preco();
 
                 EstruturaValor {
-                    estrutura: g.get_estrutura().to_string(),
-                    geometria: g.get_geometria().to_string(),
+                    estrutura: g.get_estrutura(),
+                    geometria: g.get_geometria(),
                     valor: preco,
                 }
             })
@@ -42,8 +42,8 @@ impl Orcamento {
             .fold(0.0, |acc, estrutura| acc + estrutura.valor);
 
         Ok(Orcamento {
-            movel: movel.movel.clone(),
-            material: movel.material.clone(),
+            movel: &movel.movel,
+            material: &movel.material,
             estruturas,
             preco_total,
         })
