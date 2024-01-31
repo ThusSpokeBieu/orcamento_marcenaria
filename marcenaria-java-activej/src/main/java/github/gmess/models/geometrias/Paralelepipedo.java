@@ -1,13 +1,10 @@
 package github.gmess.models.geometrias;
 
-import com.dslplatform.json.CompiledJson;
-import com.dslplatform.json.JsonAttribute;
 import github.gmess.utils.NumberUtils;
 
-@CompiledJson(name = "paralelepipedo")
 public record Paralelepipedo(
-    @JsonAttribute(name = "estrutura") 
-    String estruturaParalelepipedo,
+    String geometria,
+    String estrutura,
     String altura,
     String comprimento,
     String largura
@@ -19,7 +16,7 @@ public record Paralelepipedo(
 
   @Override
   public final String getEstrutura() {
-    return this.estruturaParalelepipedo;
+    return this.estrutura;
   }
 
   @Override

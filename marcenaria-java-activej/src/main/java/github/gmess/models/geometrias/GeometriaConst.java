@@ -1,28 +1,32 @@
 package github.gmess.models.geometrias;
 
-import java.io.IOException;
-import com.dslplatform.json.DslJson;
-import com.dslplatform.json.JsonWriter;
+import java.util.HashSet;
+import java.util.Set;
+import io.activej.json.JsonCodec;
+import io.activej.json.JsonCodecs;
+import io.activej.json.JsonUtils;
 
-public abstract class GeometriaConst {
-  public final static Geometria[] GEOMETRIAS = new Geometria[] { 
-    new Esfera("Estrutura Esférica", "1,0cm"),
-    new Cubo("Estrutura Cúbica", "1,0cm"),
-    new Cilindro("Estrutura Cilindríca", "1,0cm", "1,0cm"),
-    new Paralelepipedo("Estrutura Paralelepipedo", "1,0cm", "1,0cm", "1,0cm")
-  };
+public class GeometriaConst {
+  public final Set<Geometria> GEOMETRIAS = new HashSet<Geometria>();
 
-  public static final byte[] BYTES;
+  public final byte[] BYTES;
+  public final String JSON;
 
-  static {
-    DslJson<Object> dslJson = new DslJson<>();
-    JsonWriter writer = dslJson.newWriter();
-    try {
-      dslJson.serialize(writer, GEOMETRIAS);
-      BYTES = writer.toByteArray();
-      writer.reset();
-    } catch (IOException e) {
-      throw new ExceptionInInitializerError(e);
-    }
+  public GeometriaConst(final JsonCodec<Geometria> jsonCodec) {
+
+    final var setCodec = JsonCodecs.ofSet(jsonCodec);
+    
+    final var esfera = new Esfera("esfera", "Estrutura Esférica", "1,0cm");
+    final var cubo = new Cubo("cubo", "Estrutura Cúbica", "1,0cm");
+    final var cilindro = new Cilindro("cilindro", "Estrutura Cilindríca", "1,0cm", "1,0cm");
+    final var paralelepipedo = new Paralelepipedo("paralelepipedo", "Estrutura Paralelepipedo", "1,0cm", "1,0cm", "1,0cm");
+
+    GEOMETRIAS.add(esfera);
+    GEOMETRIAS.add(cubo);
+    GEOMETRIAS.add(cilindro);
+    GEOMETRIAS.add(paralelepipedo);
+
+    JSON = JsonUtils.toJson(setCodec, this.GEOMETRIAS);
+    BYTES = JsonUtils.toJsonBytes(setCodec, this.GEOMETRIAS);
   }
 }

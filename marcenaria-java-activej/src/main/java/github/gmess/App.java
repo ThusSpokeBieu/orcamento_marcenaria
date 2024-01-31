@@ -1,75 +1,128 @@
 package github.gmess;
 
-import com.dslplatform.json.DslJson;
-import com.dslplatform.json.JsonReader;
-import com.dslplatform.json.JsonWriter;
+import github.gmess.codecs.EstruturaValorCodecs;
+import github.gmess.codecs.MovelCodecs;
+import github.gmess.codecs.OrcamentoCodecs;
+import github.gmess.codecs.geometrias.CilindroCodecs;
+import github.gmess.codecs.geometrias.CuboCodecs;
+import github.gmess.codecs.geometrias.EsferaCodecs;
+import github.gmess.codecs.geometrias.GeometriaCodecs;
+import github.gmess.codecs.geometrias.ParalelepipedoCodecs;
+import github.gmess.models.EstruturaValor;
 import github.gmess.models.Movel;
 import github.gmess.models.Orcamento;
+import github.gmess.models.geometrias.Cilindro;
+import github.gmess.models.geometrias.Cubo;
+import github.gmess.models.geometrias.Esfera;
+import github.gmess.models.geometrias.Geometria;
 import github.gmess.models.geometrias.GeometriaConst;
+import github.gmess.models.geometrias.Paralelepipedo;
+import io.activej.bytebuf.ByteBuf;
+import io.activej.common.exception.MalformedDataException;
 import io.activej.http.AsyncServlet;
-import io.activej.http.ContentTypes;
-import io.activej.http.HttpHeaderValue;
-import io.activej.http.HttpHeaderValue.HttpHeaderValueOfContentType;
-import io.activej.http.HttpHeaders;
 import io.activej.http.HttpMethod;
 import io.activej.http.HttpResponse;
 import io.activej.http.RoutingServlet;
+import io.activej.inject.Injector;
 import io.activej.inject.annotation.Provides;
+import io.activej.json.JsonCodec;
+import io.activej.json.JsonUtils;
 import io.activej.launchers.http.HttpServerLauncher;
 import io.activej.reactor.Reactor;
 
 public class App extends HttpServerLauncher {
-
   @Provides
-  public DslJson<Object> json() {
-    return new DslJson<>();
+  public JsonCodec<Esfera> esferaCodec() {
+    return EsferaCodecs.create();
   }
 
   @Provides
-  public JsonWriter jsonWriter(final DslJson<Object> dslJson) {
-    return dslJson.newWriter();
+  public JsonCodec<Cubo> cuboCodec() {
+    return CuboCodecs.create();
   }
 
   @Provides
-  public JsonReader<Object> jsonReader(
-    final DslJson<Object> dslJson) {
-    return dslJson.newReader();
+  public JsonCodec<Cilindro> cilindroCodec() {
+    return CilindroCodecs.create();
   }
 
   @Provides
-  public HttpHeaderValue jsonType() {
-    return HttpHeaderValueOfContentType.ofContentType(ContentTypes.JSON_UTF_8);
+  public JsonCodec<Paralelepipedo> paralelepipedoCodec() {
+    return ParalelepipedoCodecs.create();
   }
 
-	@Provides
+  @Provides
+  public JsonCodec<EstruturaValor> estruturaValorCodec() {
+    return EstruturaValorCodecs.create();
+  }
+
+  @Provides
+  public JsonCodec<Orcamento> orcamentoCodec(final JsonCodec<EstruturaValor> estruturaValorCodec) {
+    return OrcamentoCodecs.create(estruturaValorCodec);
+  }
+
+  @Provides
+  public JsonCodec<Geometria> geometriaCodec(
+    final JsonCodec<Esfera> esferaJsonCodec,
+    final JsonCodec<Cubo> cuboJsonCodec,
+    final JsonCodec<Cilindro> cilindroJsonCodec,
+    final JsonCodec<Paralelepipedo> paralelepipedoJsonCodec
+  ) {
+    return GeometriaCodecs.create(esferaJsonCodec, cuboJsonCodec, cilindroJsonCodec, paralelepipedoJsonCodec);
+  }
+
+  @Provides
+  public JsonCodec<Movel> movelCodec(
+    final JsonCodec<Geometria> geometriaCodec
+  ) {
+    return MovelCodecs.create(geometriaCodec);
+  }
+
+  @Provides
+  public GeometriaConst geometriaConst(
+    final JsonCodec<Geometria> geometriaCodec
+  ) {
+    return new GeometriaConst(geometriaCodec);
+  }
+
+  @Provides
 	AsyncServlet servlet(
     final Reactor reactor, 
-    final DslJson<Object> json,
-    final JsonReader<Object> reader,
-    final JsonWriter writer,
-    final HttpHeaderValue contentType) {
-		return RoutingServlet.builder(reactor)
-      .with(HttpMethod.GET, "/geometrias", $ -> HttpResponse.ok200()
-                 .withHeader(HttpHeaders.CONTENT_TYPE, contentType)
-                 .withBody(GeometriaConst.BYTES)
-                 .toPromise())
+    final JsonCodec<Movel> movelJsonCodec,
+    final JsonCodec<Orcamento> orcamentoJsonCodec,
+    final GeometriaConst GEOMETRIAS) {
+		
+    return RoutingServlet.builder(reactor)
+
+      .with(HttpMethod.GET, "/geometrias", $ -> 
+               HttpResponse.ok200()
+                    .withBody(GEOMETRIAS.BYTES)
+                    .toPromise()
+      )
+        
       .with(HttpMethod.POST, "/orcamento", request -> request.loadBody()
-          .then(body -> {
-            writer.reset();
-            Movel movel = reader.process(body.getArray(), body.getArray().length)
-                            .next(Movel.class);
-            Orcamento orcamento = Orcamento.from(movel);
-            json.serialize(writer, orcamento);
+          .then($ -> {
+            ByteBuf body = request.getBody();
             
-            return HttpResponse.ok200()
-                    .withHeader(HttpHeaders.CONTENT_TYPE, contentType)
-                    .withBody(writer.toByteArray())
-                    .toPromise();
-      }))
+            try {
+			        byte[] bodyBytes = body.getArray();
+			        Movel movel = JsonUtils.fromJsonBytes(movelJsonCodec, bodyBytes);
+              Orcamento orcamento = Orcamento.from(movel);
+			         
+              return HttpResponse.ok200()
+                .withJson(JsonUtils.toJson(orcamentoJsonCodec, orcamento))
+                .toPromise();
+
+			      } catch (MalformedDataException e) {
+			        return HttpResponse.ofCode(400).withBody(e.getMessage()).toPromise();
+            }
+          }))
+      
       .build();
 	}
 
 	public static void main(String[] args) throws Exception {
+    Injector.useSpecializer();
 		var app = new App();
 		app.launch(args);
 	}

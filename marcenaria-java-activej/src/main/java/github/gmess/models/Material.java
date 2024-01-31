@@ -1,18 +1,16 @@
 package github.gmess.models;
 
-import com.dslplatform.json.JsonValue;
 import github.gmess.utils.StrUtils;
 
 public enum Material {
-  PINHO("pinho", 0.10),
-  CARVALHO("carvalho", 0.30),
-  EBANO("ebano", 5.0);
+  pinho("pinho", 0.10),
+  carvalho("carvalho", 0.30),
+  ebano("ebano", 5.0);                                                                                                                                                                                 
 
-  private final String nome;
+  private final String nome;                                                   
 
   private final double precoBase;
 
-  @JsonValue
   public String getNomeAsString() {
     return nome;
   }
@@ -29,5 +27,18 @@ public enum Material {
     this.nome = nome;
     this.precoBase = precoBase;
   }
+
+  public static boolean validate(final String input) {
+    final String normalized = StrUtils.normalizeString(input);
+    
+    for (Material material : Material.values()) {
+      if (material.getNomeAsString().equals(normalized)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
 
 }

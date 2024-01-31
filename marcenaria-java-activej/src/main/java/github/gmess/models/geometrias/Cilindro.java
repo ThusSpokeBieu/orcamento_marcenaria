@@ -1,15 +1,11 @@
 package github.gmess.models.geometrias;
 
-import com.dslplatform.json.CompiledJson;
-import com.dslplatform.json.JsonAttribute;
 import github.gmess.utils.NumberUtils;
 
-@CompiledJson(name = "cilindro")
 public record Cilindro(
-  @JsonAttribute(name = "estrutura") 
-  String estruturaCilindrica, 
+  String geometria,
+  String estrutura, 
   
-  @JsonAttribute(name = "raio_base") 
   String raioBase, 
 
   String altura) implements Geometria {
@@ -21,7 +17,7 @@ public record Cilindro(
 
   @Override
   public final String getEstrutura() {
-    return this.estruturaCilindrica;
+    return this.estrutura;
   }
 
   @Override

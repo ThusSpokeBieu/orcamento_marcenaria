@@ -1,32 +1,28 @@
 package github.gmess.models;
 
-import com.dslplatform.json.CompiledJson;
-import com.dslplatform.json.JsonAttribute;
+import java.util.HashSet;
+import java.util.Set;
+import github.gmess.models.geometrias.Geometria;
 import github.gmess.utils.StrUtils;
 
-/**
- * Orcamento
- */
-@CompiledJson
 public record Orcamento(
   String movel,
   Material material,
-  @JsonAttribute(name = "preço_total")
   String precoTotal,
-  EstruturaValor[] estruturas
+  Set<EstruturaValor> estruturas
 ) {
 
   public static Orcamento from(final Movel movel) {
     double precoFinal = 0;
     final var geometrias = movel.geometrias();
     final var material = movel.material();
-    final var estruturas = new EstruturaValor[geometrias.length];
+    final Set<EstruturaValor> estruturas = new HashSet<>();
 
-    for(int i = 0; i < geometrias.length; i++) {
-      final double precoGeometria = geometrias[i].getArea() * material.getPrecoBase();
+    for(Geometria geometria : movel.geometrias()) {
+      final double precoGeometria = geometria.getArea() * material.getPrecoBase();
       precoFinal += precoGeometria;
 
-      estruturas[i] = EstruturaValor.from(geometrias[i], StrUtils.doubleToReal(precoGeometria));
+      estruturas.add(EstruturaValor.from(geometria, StrUtils.doubleToReal(precoGeometria)));
     }
 
     return new Orcamento(

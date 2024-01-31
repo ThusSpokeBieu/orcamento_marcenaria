@@ -1,16 +1,13 @@
 package github.gmess.models.geometrias;
 
-import com.dslplatform.json.CompiledJson;
-import com.dslplatform.json.JsonAttribute;
 import github.gmess.utils.NumberUtils;
 
 /**
  * Cubo
  */
-@CompiledJson(name = "cubo")
 public record Cubo(
-  @JsonAttribute(name = "estrutura")
-  String estruturaCubica,
+  String geometria,
+  String estrutura,
   String lado
 ) implements Geometria {
   
@@ -21,7 +18,7 @@ public record Cubo(
 
   @Override
   public final String getEstrutura() {
-    return this.estruturaCubica;
+    return this.estrutura;
   }
 
   @Override

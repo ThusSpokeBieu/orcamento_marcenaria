@@ -1,8 +1,10 @@
 .idea/**
 .settings/**
-target/**
-.classpath
+.apt_generated_tests/**
+.clasapath
 .factorypath
 .project
-**.class 
-**.jar
+
+**target/**
+
+
