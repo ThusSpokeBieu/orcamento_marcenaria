@@ -5,6 +5,8 @@ mod handlers;
 mod models;
 mod utils;
 
+use std::time::Duration;
+
 use actix_http::{HttpService, KeepAlive};
 use actix_service::map_config;
 use actix_web::{
@@ -14,10 +16,10 @@ use actix_web::{
 };
 
 use models::{
-    final_result::{FinalResult, PrecoEstrutura},
-    geometrias::geometria::Geometria,
-    madeiras::MadeiraInfo,
+    geometrias::Geometria,
+    materiais::MaterialInfo,
     moveis::Movel,
+    orcamento::{EstruturaValor, Orcamento},
 };
 
 use handlers::{geometrias_handler, materiais_handler, orcamento_handler};
@@ -33,7 +35,7 @@ use utoipa_swagger_ui::SwaggerUi;
         materiais_handler::materiais,
         orcamento_handler::orcamento
     ),
-    components(schemas(MadeiraInfo, Movel, FinalResult, PrecoEstrutura, Geometria))
+    components(schemas(MaterialInfo, Geometria, Movel, Orcamento, EstruturaValor))
 )]
 struct ApiDoc;
 
@@ -46,11 +48,11 @@ async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
 
     Server::build()
-        .backlog(2048 * 8)
-        .workers(num_cpus::get() * 2)
+        .backlog(16500)
+        .workers(1)
         .bind("Marcenaria", "0.0.0.0:8080", move || {
             HttpService::build()
-                .keep_alive(KeepAlive::Os)
+                .keep_alive(KeepAlive::Timeout(Duration::ZERO))
                 .h1(map_config(
                     App::new()
                         .service(Redoc::with_url("/redoc", openapi.clone()))

@@ -1,6 +1,6 @@
 use actix_web::{web::Json, HttpResponse, Responder};
 
-use crate::models::{final_result::FinalResult, moveis::Movel};
+use crate::models::{moveis::Movel, orcamento::Orcamento};
 
 #[utoipa::path(
   post,
@@ -11,10 +11,10 @@ use crate::models::{final_result::FinalResult, moveis::Movel};
   )
 )]
 pub async fn orcamento(json: Json<Movel>) -> impl Responder {
-    let result = FinalResult::from(&json);
+    let result = Orcamento::from(&json);
 
     match result {
-        Ok(orcamento) => HttpResponse::Ok().json(orcamento),
+        Ok(orcamento) => HttpResponse::Ok().json(&orcamento),
         Err(err) => HttpResponse::BadRequest().body(err.to_string()),
     }
 }

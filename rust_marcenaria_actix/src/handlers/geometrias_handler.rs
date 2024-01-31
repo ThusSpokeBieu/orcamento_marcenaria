@@ -1,6 +1,6 @@
 use actix_web::{HttpResponse, Responder};
 
-use crate::models::geometrias::geometria::Geometria;
+use crate::models::geometrias::Geometria;
 
 #[utoipa::path(
   get,
@@ -13,5 +13,5 @@ use crate::models::geometrias::geometria::Geometria;
   )
 )]
 pub async fn geometrias() -> impl Responder {
-    HttpResponse::Ok().json(&Geometria::get_all_info())
+    HttpResponse::Ok().json(Geometria::get_geometrias())
 }

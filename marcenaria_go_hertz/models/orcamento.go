@@ -1,6 +1,10 @@
 package models
 
-import "marcenaria/utils"
+import (
+	"fmt"
+
+	"marcenaria_go_hertz/utils"
+)
 
 type Orcamento struct {
 	Movel      string
@@ -25,7 +29,11 @@ func NewOrcamento(movel *Movel) (Orcamento, []error) {
 		errList = append(errList, err)
 	}
 
-	for _, geometria := range movel.Geometrias {
+	for i, geometria := range movel.Geometrias {
+		if geometria.Estrutura == "" || geometria.Geometria == "" {
+			errList = append(errList, fmt.Errorf("A geometria de indíce %v é inválida", i))
+		}
+
 		preco, err := geometria.GetPreco(&material)
 		if err != nil {
 			errList = append(errList, err...)

@@ -1,6 +1,6 @@
 use actix_web::{HttpResponse, Responder};
 
-use crate::models::madeiras::Madeira;
+use crate::models::materiais::Material;
 
 #[utoipa::path(
   get,
@@ -9,9 +9,9 @@ use crate::models::madeiras::Madeira;
     (
       status = 200,
       description = "Lista de materiais disponíveis",
-      body = [MadeiraInfo])
+      body = [MaterialInfo])
   )
 )]
 pub async fn materiais() -> impl Responder {
-    HttpResponse::Ok().json(&Madeira::get_all_info())
+    HttpResponse::Ok().json(&Material::get_all_info())
 }

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"marcenaria/utils"
+	"marcenaria_go_hertz/utils"
 )
 
 type Material struct {
