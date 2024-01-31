@@ -1,4 +1,5 @@
 use serde::Serialize;
+use smallvec::SmallVec;
 use utoipa::ToSchema;
 
 use super::{materiais::Material, moveis::Movel};
@@ -8,7 +9,7 @@ pub struct Orcamento {
     pub movel: String,
     pub material: String,
     pub preco_total: f64,
-    pub estruturas: Vec<EstruturaValor>,
+    pub estruturas: SmallVec<[EstruturaValor; 8]>,
 }
 
 #[derive(Serialize, ToSchema)]
@@ -22,7 +23,7 @@ impl Orcamento {
     pub fn from(movel: &Movel) -> Result<Orcamento, std::io::Error> {
         let material = Material::from_str(&movel.material)?;
 
-        let estruturas: Vec<EstruturaValor> = movel
+        let estruturas: SmallVec<[EstruturaValor; 8]> = movel
             .geometrias
             .iter()
             .map(|g| {

@@ -1,4 +1,4 @@
-package github.gmess.codecs.geometrias;
+package github.gmess.configs.codecs.geometrias;
 
 import github.gmess.models.geometrias.Cilindro;
 import io.activej.json.JsonCodec;

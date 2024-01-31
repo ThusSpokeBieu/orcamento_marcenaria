@@ -1,4 +1,5 @@
 use serde::Deserialize;
+use smallvec::SmallVec;
 use utoipa::ToSchema;
 
 use super::geometrias::Geometria;
@@ -7,5 +8,5 @@ use super::geometrias::Geometria;
 pub struct Movel {
     pub movel: String,
     pub material: String,
-    pub geometrias: Vec<Geometria>,
+    pub geometrias: SmallVec<[Geometria; 8]>,
 }

@@ -1,90 +1,30 @@
 package github.gmess;
 
-import github.gmess.codecs.EstruturaValorCodecs;
-import github.gmess.codecs.MovelCodecs;
-import github.gmess.codecs.OrcamentoCodecs;
-import github.gmess.codecs.geometrias.CilindroCodecs;
-import github.gmess.codecs.geometrias.CuboCodecs;
-import github.gmess.codecs.geometrias.EsferaCodecs;
-import github.gmess.codecs.geometrias.GeometriaCodecs;
-import github.gmess.codecs.geometrias.ParalelepipedoCodecs;
-import github.gmess.models.EstruturaValor;
 import github.gmess.models.Movel;
 import github.gmess.models.Orcamento;
-import github.gmess.models.geometrias.Cilindro;
-import github.gmess.models.geometrias.Cubo;
-import github.gmess.models.geometrias.Esfera;
-import github.gmess.models.geometrias.Geometria;
 import github.gmess.models.geometrias.GeometriaConst;
-import github.gmess.models.geometrias.Paralelepipedo;
+import github.gmess.modules.CodecsModule;
 import io.activej.bytebuf.ByteBuf;
 import io.activej.common.exception.MalformedDataException;
 import io.activej.http.AsyncServlet;
 import io.activej.http.HttpMethod;
 import io.activej.http.HttpResponse;
 import io.activej.http.RoutingServlet;
-import io.activej.inject.Injector;
 import io.activej.inject.annotation.Provides;
+import io.activej.inject.module.Module;
+import io.activej.inject.module.Modules;
 import io.activej.json.JsonCodec;
 import io.activej.json.JsonUtils;
 import io.activej.launchers.http.HttpServerLauncher;
 import io.activej.reactor.Reactor;
 
 public class App extends HttpServerLauncher {
-  @Provides
-  public JsonCodec<Esfera> esferaCodec() {
-    return EsferaCodecs.create();
-  }
 
-  @Provides
-  public JsonCodec<Cubo> cuboCodec() {
-    return CuboCodecs.create();
+  @Override
+  protected Module getBusinessLogicModule() {
+    return Modules.combine(new CodecsModule());
   }
-
-  @Provides
-  public JsonCodec<Cilindro> cilindroCodec() {
-    return CilindroCodecs.create();
-  }
-
-  @Provides
-  public JsonCodec<Paralelepipedo> paralelepipedoCodec() {
-    return ParalelepipedoCodecs.create();
-  }
-
-  @Provides
-  public JsonCodec<EstruturaValor> estruturaValorCodec() {
-    return EstruturaValorCodecs.create();
-  }
-
-  @Provides
-  public JsonCodec<Orcamento> orcamentoCodec(final JsonCodec<EstruturaValor> estruturaValorCodec) {
-    return OrcamentoCodecs.create(estruturaValorCodec);
-  }
-
-  @Provides
-  public JsonCodec<Geometria> geometriaCodec(
-    final JsonCodec<Esfera> esferaJsonCodec,
-    final JsonCodec<Cubo> cuboJsonCodec,
-    final JsonCodec<Cilindro> cilindroJsonCodec,
-    final JsonCodec<Paralelepipedo> paralelepipedoJsonCodec
-  ) {
-    return GeometriaCodecs.create(esferaJsonCodec, cuboJsonCodec, cilindroJsonCodec, paralelepipedoJsonCodec);
-  }
-
-  @Provides
-  public JsonCodec<Movel> movelCodec(
-    final JsonCodec<Geometria> geometriaCodec
-  ) {
-    return MovelCodecs.create(geometriaCodec);
-  }
-
-  @Provides
-  public GeometriaConst geometriaConst(
-    final JsonCodec<Geometria> geometriaCodec
-  ) {
-    return new GeometriaConst(geometriaCodec);
-  }
-
+  
   @Provides
 	AsyncServlet servlet(
     final Reactor reactor, 
@@ -122,7 +62,6 @@ public class App extends HttpServerLauncher {
 	}
 
 	public static void main(String[] args) throws Exception {
-    Injector.useSpecializer();
 		var app = new App();
 		app.launch(args);
 	}

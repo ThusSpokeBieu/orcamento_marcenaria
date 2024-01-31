@@ -15,9 +15,8 @@ pub mod centimeter_str {
     {
         let value = String::deserialize(deserializer)?;
         let value = value.replace(",", ".");
-        let value = value.replace("cm", "");
-        match value.parse::<f64>() {
-            Ok(value) => Ok(value),
+        match fast_float::parse_partial::<f64, _>(value) {
+            Ok(value) => Ok(value.0),
             Err(_) => Err(Error::custom(
                 "Centimetro deve ser númerico ou no formato 'x,xxcm'",
             )),

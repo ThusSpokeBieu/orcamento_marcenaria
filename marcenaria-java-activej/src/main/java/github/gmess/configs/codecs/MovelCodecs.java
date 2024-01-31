@@ -1,4 +1,4 @@
-package github.gmess.codecs;
+package github.gmess.configs.codecs;
 
 import github.gmess.models.Material;
 import github.gmess.models.Movel;

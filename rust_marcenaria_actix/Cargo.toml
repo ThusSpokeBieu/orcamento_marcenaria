@@ -24,3 +24,5 @@ utoipa = { version = "4.2.0", features = ["actix_extras"] }
 utoipa-rapidoc = { version = "3.0.0", features = ["actix-web"] }
 utoipa-redoc = { version = "3.0.0", features = ["actix-web"] }
 utoipa-swagger-ui = { version = "6.0.0", features = ["actix-web"] }
+fast-float = "0.2.0"
+smallvec = { version = "1.13.1", features = ["serde"] }

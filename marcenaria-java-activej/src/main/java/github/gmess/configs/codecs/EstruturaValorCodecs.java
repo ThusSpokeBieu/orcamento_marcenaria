@@ -1,4 +1,4 @@
-package github.gmess.codecs;
+package github.gmess.configs.codecs;
 
 import github.gmess.models.EstruturaValor;
 import io.activej.json.JsonCodec;
