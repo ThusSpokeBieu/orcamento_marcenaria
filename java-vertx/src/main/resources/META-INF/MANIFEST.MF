@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: github.gmess.App
-Can-Redefine-Classes: true
-Can-Retransform-Classes: true
-Can-Set-Native-Method-Prefix: true
-Xms: 2G
-Xmx: 2G
