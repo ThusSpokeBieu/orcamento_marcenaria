@@ -6,10 +6,10 @@ use ntex::util::Bytes;
 use utoipa::OpenApi;
 
 use crate::exceptions::http_error::HttpError;
-use crate::models::madeiras::MadeiraInfo;
+use crate::models::materiais::MaterialInfo;
 use crate::models::moveis::Movel;
-use crate::models::final_result::{FinalResult, PrecoEstrutura};
-use crate::models::geometrias::geometria::Geometria;
+use crate::models::orcamento::{Orcamento, EstruturaValor};
+use crate::models::geometrias::Geometria;
 use super::orcamento;
 
 #[derive(OpenApi)]
@@ -17,7 +17,7 @@ use super::orcamento;
   paths(orcamento::get_materiais,
     orcamento::post_orcamento,
     orcamento::get_geometrias),
-  components(schemas(MadeiraInfo, HttpError, Movel, FinalResult, PrecoEstrutura, Geometria))
+  components(schemas(MaterialInfo, HttpError, Movel, Orcamento, EstruturaValor, Geometria))
 )]
 pub(crate) struct ApiDoc;
 

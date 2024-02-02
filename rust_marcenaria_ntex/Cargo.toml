@@ -16,7 +16,7 @@ uom = { version = "0.35.0", features = ["use_serde"] }
 utoipa = "4.2.0"
 utoipa-swagger-ui = "6.0.0"
 num_cpus = "1.16"
-smallvec = "1.11"
+smallvec = { version = "1.11", features = ["serde"] }
 buf-min = { version = "0.7", features = ["ntex-bytes"] }
 nanorand = { version = "0.7", default-features = false, features = [
   "std",
@@ -26,6 +26,7 @@ nanorand = { version = "0.7", default-features = false, features = [
 atoi = "2.0"
 rayon = "1.8.1"
 simd-json = "0.13.8"
+fast-float = "0.2.0"
 
 [profile.release]
 opt-level = 3

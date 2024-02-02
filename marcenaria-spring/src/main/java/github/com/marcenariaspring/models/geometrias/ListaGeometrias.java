@@ -1,8 +1,6 @@
 package github.com.marcenariaspring.models.geometrias;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.netty.channel.unix.Buffer;
-import java.nio.charset.StandardCharsets;
 import lombok.SneakyThrows;
 
 public class ListaGeometrias {

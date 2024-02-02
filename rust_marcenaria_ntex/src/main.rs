@@ -7,9 +7,7 @@ mod models;
 mod utils;
 
 use ntex::{
-  http,
-  util::PoolId,
-  web::{self, route},
+  http, time::Seconds, util::PoolId, web::{self, route}
 };
 
 const HOST: &str = "127.0.0.1:8080";
@@ -17,15 +15,18 @@ const HOST: &str = "127.0.0.1:8080";
 #[ntex::main]
 async fn main() -> std::io::Result<()> {
   ntex::server::build()
-    .backlog(16 * 2048)
-    .workers(num_cpus::get() * 2)
+    .backlog(16805)
+    .workers(num_cpus::get())
     .bind("Marcenaria", HOST, |cfg| {
       cfg.memory_pool(PoolId::P1);
-      PoolId::P1.set_read_params(65535 * 16, 2048 * 16);
-      PoolId::P1.set_write_params(65535 * 16, 2048 * 16);
+      PoolId::P1.set_read_params(65535, 2048);
+      PoolId::P1.set_write_params(65535, 2048);
 
       http::HttpService::build()
-        .keep_alive(http::KeepAlive::Os)
+        .keep_alive(http::KeepAlive::Timeout(Seconds::new(60)))
+        .client_timeout(Seconds::ZERO)
+        .headers_read_rate(Seconds::ZERO, Seconds::ZERO, 0)
+        .payload_read_rate(Seconds::ZERO, Seconds::ZERO, 0)
         .h1(
           web::App::new()
             .configure(routes::openapi::ntex_config)
