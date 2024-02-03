@@ -26,11 +26,11 @@ As payloads podem ser encontradas no repositório [payloads](./payloads/).
 
 ## Indice
 
-1. [Motivação](#motivacao)
-2. [O Desafio](#o_desafio)
-3. [Como funciona o benchmark?](#como_funciona_o_benchmark)
-4. [Como contribuir?](#como_contribuir)
-5. [Lista de Implementações](#lista_de_implementacoes)
+1. [Motivação](#motivação)
+2. [O Desafio](#o-desafio)
+3. [Como funciona o benchmark?](#como-funciona-o-benchmark)
+4. [Como contribuir?](#como-contribuir)
+5. [Lista de Implementações](#lista-de-implementações)
 6. [Contato](#contato)
 
 ## Motivação 
@@ -69,19 +69,19 @@ Fique à vontade para fazer comentários, divulgar o repositório, criar forks, 
 
 
 - [Go](./codes/go/)
-- - [Fiber Framework](./codes/go/marcenaria-go-fiber/)
-- - [Hertz Framework](./codes/go/marcenaria-go-hertz/go.mod) 
+    - [Fiber Framework](./codes/go/marcenaria-go-fiber/)
+    - [Hertz Framework](./codes/go/marcenaria-go-hertz/go.mod) 
 
 
 - [Java](./codes/java/)
- - [ActiveJ Java 21](./codes/java/marcenaria-java-activej/)
- - [Springboot Java 21](./codes/java/marcenaria-spring/)
- - [Vertx Java 21](./codes/java/marcenaria-java-vertx/) 
+    - [ActiveJ Java 21](./codes/java/marcenaria-java-activej/)
+    - [Springboot Java 21](./codes/java/marcenaria-spring/)
+    - [Vertx Java 21](./codes/java/marcenaria-java-vertx/) 
 
 
 - [Rust](./codes/rust/)
- - [Actix](./codes/rust/marcenaria_rust_actix/)
- - [Ntex](./codes/rust/marcenaria_rust_ntex/) 
+    - [Actix](./codes/rust/marcenaria_rust_actix/)
+    - [Ntex](./codes/rust/marcenaria_rust_ntex/) 
 
 ## Contato 
 
