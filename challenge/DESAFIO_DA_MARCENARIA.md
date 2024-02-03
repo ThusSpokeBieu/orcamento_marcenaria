@@ -58,6 +58,41 @@ Existe também o nível avançado que servirá para ser feito o benchmark que po
 | ébano             | R$5,00       |
 
 
+### GEOMETRIAS E FÓRMULAS DE CÁLCULO ÁREA 
+
+*NÍVEL BÁSICO*
+
+| *GEOMETRIA*    | *FÓRMULA*                                                             |
+|----------------|-----------------------------------------------------------------------|
+| ESFERA         | 2 * pi * raio²                                                        |
+| CUBO           | 6 * lado²                                                             |
+| CILINDRO       | 6 * pi * raio base * (raio base + altura)                             |
+| PARALELEPIPEDO | 2 * (comprimento * largura + comprimento * altura + largura * altura) |
+
+*NIVEL AVANÇADO*
+
+| *GEOMETRIA*              | *FÓRMULA*                                                 |
+|--------------------------|-----------------------------------------------------------|
+| ESFERA                   | 2×pi×raio²                                                |
+| CUBO                     | 6×lado²                                                   |
+| CILINDRO                 | 6×pi×raio base×(raio base + altura)                       |
+| PARALELEPIPEDO           | 2×(comprimento×largura+largura×altura+altura×comprimento) |
+| PIRAMIDE BASE QUADRADA   | lado²+4×(lado×altura/2)                                   |
+| PIRAMIDE BASE TRIANGULAR |                                                           | 
+| DISCO                    | pi×raio²                                                  |
+
+| *GEOMETRIA*              | *FÓRMULA*                                                                                           |
+|--------------------------|-----------------------------------------------------------------------------------------------------|
+| ESFERA                   | \(2 \pi \times \text{raio}^2\)                                                                     |
+| CUBO                     | \(6 \times \text{lado}^2\)                                                                         |
+| CILINDRO                 | \(2 \pi \times \text{raio base} \times (\text{raio base} + \text{altura})\)                         |
+| PARALELEPIPEDO           | \(2 \times (\text{comprimento} \times \text{largura} + \text{largura} \times \text{altura} + \text{altura} \times \text{comprimento})\) |
+| PIRÂMIDE BASE QUADRADA   | \(\text{lado}^2 + 4 \times (\text{lado} \times \text{altura}/2)\)                                   |
+| PIRÂMIDE BASE TRIANGULAR | \(\frac{\sqrt{3}}{4} \times \text{lado}^2 + 3 \times (\text{lado} \times \text{altura}/2)\)         |
+| DISCO                    | \(\pi \times \text{raio}^2\)                                                                       |
+
+
+
 A payload de request e de resposta devem seguir o seguinte padrão:
 
 
