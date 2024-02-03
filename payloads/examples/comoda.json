@@ -1,0 +1,67 @@
+{
+        "movel": "CÔMODA",
+        "geometrias": [
+          {
+            "geometria": "paralelepipedo",
+            "material": "PINHO",
+            "estrutura": "gaveta superior",
+            "comprimento": "60cm",
+            "largura": "40cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "paralelepipedo",
+            "material": "PINHO",
+            "estrutura": "gaveta do meio",
+            "geometria": "paralelepipedo",
+            "comprimento": "60cm",
+            "largura": "40cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "paralelepipedo",
+            "material": "PINHO",
+            "estrutura": "gaveta inferior",
+            "comprimento": "60cm",
+            "largura": "40cm",
+            "altura": "20cm"
+          },
+          {
+            "geometria": "paralelepipedo",
+            "material": "PINHO",
+            "estrutura": "base",
+            "comprimento": "70cm",
+            "largura": "50cm",
+            "altura": "5cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "PINHO",
+            "estrutura": "pé 1",
+            "raio_base": "2cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "PINHO",
+            "estrutura": "pé 2",
+            "raio_base": "2cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "PINHO",
+            "estrutura": "pé 3",
+            "raio_base": "2cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "PINHO",
+            "estrutura": "pé 4",
+            "raio_base": "2cm",
+            "altura": "15cm"
+          }
+        ]
+      }
+

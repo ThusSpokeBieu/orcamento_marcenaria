@@ -1,45 +1,37 @@
-# DESAFIO DA MARCENARIA
+# DESAFIO DE PROGRAMAÇÃO - API PARA ORÇAMENTO DE MÓVEIS PLANEJADOS
 
-O desafio a seguir tem a proposta de desenvolver uma simples API REST para aplicação prática de conceitos básicos de programação. Ele faz parte de um projeto de benchmark de frameworks web, mas pode ser utilizado como base para estudo, prova de conceito e projetos pessoais. Ele pode ser realizado em qualquer linguagem de programação e framework de preferência.
+Este desafio tem como objetivo o desenvolvimento de uma API REST para aplicação prática de conceitos básicos de programação. Parte de um projeto de benchmark de frameworks web, a API simula um sistema de orçamento de móveis planejados para marcenaria.
 
-Para os benchmarks ele precisa seguir os padrões e requisitos mínimos; mas, por se for feito em outra ocasião, você pode adaptá-lo com suas preferências.
+Pode ser implementado em qualquer linguagem de programação e framework de preferência. Embora haja padrões e requisitos mínimos para benchmarks, o desafio pode ser adaptado conforme preferências individuais.
 
 ## DESCRIÇÃO 
 
-O desafio simula uma REST API de um sistema de Marcenaria que faz o orçamento de móveis planejados. O sistema deverá receber uma payload JSON que representa um móvel, o material que será utilizado no movel, e medidas de estruturas geométricas que serão usadas nesse móvel.
+O desafio simula uma REST API de um sistema de Marcenaria que faz o orçamento de móveis planejados. A API deve receber uma payload JSON representando um móvel, o material a ser utilizado e as medidas das estruturas geométricas do móvel.
 
-- As estruturas devem obrigatoriamente ser representadas por objetos polimórficos de propriedades diferentes.
-- Todos os JSONs da aplicação deve possuir seus valores númericos representados por String seguida por sua medida (vide o exemplo de payload)
-- O sistema deverá calcular a área da estrutura de acordo com o tipo da geometria e as medidas recebidas.
-- O preço de cada estrutura é a área dela múltiplicada pelo preço base do material utilizado.
-- O preço do móvel é a soma do preço de todas as estruturas.
-- A serialização do input deve considerar validações e conversões, por exemplo: ignorar acentuações e caracteres com letras maiusculas/minusculas.
-- Por fim, deverá retornar uma resposta JSON com todos os dados: o móvel, material, preço total e os detalhes de cada uma de suas estrutras.
+- As estruturas devem ser representadas por objetos polimórficos com propriedades diferentes.
+- Todos os valores numéricos nos JSONs devem ser representados por strings seguidas de suas medidas (conforme exemplo de payload).
+- O sistema deve calcular a área da estrutura de acordo com o tipo de geometria e as medidas recebidas.
+- O preço de cada estrutura é a área multiplicada pelo preço base do material utilizado.
+- O preço total do móvel é a soma dos preços de todas as estruturas.
+- A serialização do input deve considerar validações e conversões, como ignorar acentuações e padronizar caracteres com letras maiúsculas/minúsculas.
+- Deve retornar uma resposta JSON com todos os dados: o móvel, material, preço total e detalhes de cada estrutura.
+- A API não precisa possuir um banco de dados; o processamento pode ser feito completamente em memória. Pode haver um endpoint que utilize cache (para comparação), mas o benchmark será medido apenas sem cache.
 
-A Api não precisa possuir banco de dados, seu processamento pode ser feito completamente em memória.
-Pode haver um endpoint que utilize cache (a fim de comparação), mas será mensurado para o benchmark apenas sem cache.
-
-OS NÚMEROS NÃO PRECISAM E NEM DEVEM SER PLAUSÍVEIS EM UM CONTEXTO REAL, A REST API É COMPLETAMENTE HIPOTÉTICA.
+*Nota: Os números não precisam ser plausíveis em um contexto real; a REST API é completamente hipotética.*
 
 ### RECURSOS
 
-Existe uma documentação de OPEN API que deve ser seguida. Assim como exemplos de requisições e de respostas aqui.
+A documentação OPEN API deve ser seguida, incluindo exemplos de requisições e respostas.
 
-Os materiais e geometrias disponíveis estão no final dessa documentação.
+*ENDPOINTS*
 
-- POST /orcamentos
-Recebe uma payload json com uma lista de móveis, detalhes de geometrias, seus materiais. Retorna o orçamento detalhado de todos.
-É o recurso utilizado para o benchmark.
+- *POST /orcamentos:* Recebe uma payload JSON com uma lista de móveis, detalhes de geometrias e seus materiais. Retorna o orçamento detalhado de todos os móveis.
 
-- POST /orcamento-unitario
-Recebe a payload json com os dados de um único móvel, detalhes das geometrias e seus materiais. Retorna o orçamento detalhado.
+- *POST /orcamento-unitario:* Recebe a payload JSON com os dados de um único móvel, detalhes das geometrias e seus materiais. Retorna o orçamento detalhado.
 
-- GET /geometrias 
-Deve retornar uma lista no formato JSON com os detalhes de todas geometrias disponíveis e os .
+*GET /geometrias:* Retorna uma lista no formato JSON com os detalhes de todas as geometrias disponíveis.
 
-- GET /materiais 
-Deve retornar uma lista no formato JSON com os detalhes de todos materiais disponíveis e seus preços base.
-
+*GET /materiais:* Retorna uma lista no formato JSON com os detalhes de todos os materiais disponíveis e seus preços base.
 
 ### MATERIAIS E PREÇOS BASES
 
@@ -105,4 +97,5 @@ Existe também o nível avançado que servirá para ser feito o benchmark que po
 
 A payload de request e de resposta devem seguir o seguinte padrão:
 
-
+- (REQUEST)[../payloads/request.json]
+- (RESPONSE)

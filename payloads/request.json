@@ -394,6 +394,115 @@
             "raio": "30cm"
           }
         ]
+      },
+      {
+        "movel": "CÔMODA",
+        "geometrias": [
+          {
+            "geometria": "paralelepipedo",
+            "material": "PINHO",
+            "estrutura": "gaveta superior",
+            "comprimento": "60cm",
+            "largura": "40cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "paralelepipedo",
+            "material": "PINHO",
+            "estrutura": "gaveta do meio",
+            "geometria": "paralelepipedo",
+            "comprimento": "60cm",
+            "largura": "40cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "paralelepipedo",
+            "material": "PINHO",
+            "estrutura": "gaveta inferior",
+            "comprimento": "60cm",
+            "largura": "40cm",
+            "altura": "20cm"
+          },
+          {
+            "geometria": "paralelepipedo",
+            "material": "PINHO",
+            "estrutura": "base",
+            "comprimento": "70cm",
+            "largura": "50cm",
+            "altura": "5cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "PINHO",
+            "estrutura": "pé 1",
+            "raio_base": "2cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "PINHO",
+            "estrutura": "pé 2",
+            "raio_base": "2cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "PINHO",
+            "estrutura": "pé 3",
+            "raio_base": "2cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "PINHO",
+            "estrutura": "pé 4",
+            "raio_base": "2cm",
+            "altura": "15cm"
+          }
+        ]
+      },
+      {
+        "movel": "ESTANTE",
+        "geometrias": [
+          {
+            "geometria": "paralelepípedo",
+            "material": "CARVALHO",
+            "estrutura": "prateleira 1",
+            "comprimento": "80cm",
+            "largura": "30cm",
+            "altura": "2cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "CARVALHO",
+            "estrutura": "prateleira 2",
+            "comprimento": "80cm",
+            "largura": "30cm",
+            "altura": "2cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "CARVALHO",
+            "estrutura": "prateleira 3",
+            "comprimento": "80cm",
+            "largura": "30cm",
+            "altura": "2cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "CARVALHO",
+            "estrutura": "pilar esquerdo",
+            "raio_base": "2cm",
+            "altura": "100cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "CARVALHO",
+            "estrutura": "pilar direito",
+            "raio_base": "2cm",
+            "altura": "100cm"
+          }
+        ]
       }
     ]
 }

@@ -1,0 +1,43 @@
+{
+  "movel": "ESTANTE",
+  "geometrias": [
+    {
+      "geometria": "paralelepípedo",
+      "material": "CARVALHO",
+      "estrutura": "prateleira 1",
+      "comprimento": "80cm",
+      "largura": "30cm",
+      "altura": "2cm"
+    },
+    {
+      "geometria": "paralelepípedo",
+      "material": "CARVALHO",
+      "estrutura": "prateleira 2",
+      "comprimento": "80cm",
+      "largura": "30cm",
+      "altura": "2cm"
+    },
+    {
+      "geometria": "paralelepípedo",
+      "material": "CARVALHO",
+      "estrutura": "prateleira 3",
+      "comprimento": "80cm",
+      "largura": "30cm",
+      "altura": "2cm"
+    },
+    {
+      "geometria": "cilindro",
+      "material": "CARVALHO",
+      "estrutura": "pilar esquerdo",
+      "raio_base": "2cm",
+      "altura": "100cm"
+    },
+    {
+      "geometria": "cilindro",
+      "material": "CARVALHO",
+      "estrutura": "pilar direito",
+      "raio_base": "2cm",
+      "altura": "100cm"
+    }
+  ]
+}

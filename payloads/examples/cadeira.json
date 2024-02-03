@@ -1,0 +1,49 @@
+{
+  "movel": "CADEIRA",
+  "geometrias": [
+    {
+      "geometria": "cilindro",
+      "material": "Carvalho",
+      "estrutura": "perna dianteira esquerda",
+      "raio_base": "1.5cm",
+      "altura": "40cm"
+    },
+    {
+      "geometria": "cilindro",
+      "material": "Carvalho",
+      "estrutura": "perna dianteira direita",
+      "raio_base": "1.5cm",
+      "altura": "40cm"
+    },
+    {
+      "geometria": "cilindro",
+      "material": "Carvalho",
+      "estrutura": "perna traseira esquerda",
+      "raio_base": "1.5cm",
+      "altura": "40cm"
+    },
+    {
+      "geometria": "cilindro",
+      "material": "Carvalho",
+      "estrutura": "perna traseira direita",
+      "raio_base": "1.5cm",
+      "altura": "40cm"
+    },
+    {
+      "geometria": "paralelepípedo",
+      "material": "Ébano",
+      "estrutura": "assento",
+      "comprimento": "40cm",
+      "largura": "40cm",
+      "altura": "5cm"
+    },
+    {
+      "geometria": "paralelepípedo",
+      "material": "Ébano",
+      "estrutura": "encosto",
+      "comprimento": "40cm",
+      "largura": "2cm",
+      "altura": "30cm"
+    }
+  ]
+}
