@@ -26,8 +26,8 @@ OS NÚMEROS NÃO PRECISAM E NEM DEVEM SER PLAUSÍVEIS EM UM CONTEXTO REAL, A RES
 O nível básico é o básico necessário para existir na API.
 
 
-| *NÍVEL BASICO* |              |
-|----------------|--------------|
+*NÍVEL BASICO*
+
 | *MATERIAL*     | *PRECO BASE* |
 |----------------|--------------|
 | pinho          | R$0,10       |
@@ -38,8 +38,8 @@ O nível básico é o básico necessário para existir na API.
 Existe também o nível avançado que servirá para ser feito o benchmark que possui mais materiais, a ideia é ter mais opções para buscar dentre as opções:
 
 
-| *NÍVEL AVANÇADO*  |              |
-|-------------------|--------------|
+*NÍVEL AVANÇADO*
+
 | *MATERIAL*        | *PRECO BASE* |
 |-------------------|--------------|
 | pinho             | R$0,10       |
