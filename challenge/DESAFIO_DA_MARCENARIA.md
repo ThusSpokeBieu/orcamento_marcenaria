@@ -25,38 +25,38 @@ OS NÚMEROS NÃO PRECISAM E NEM DEVEM SER PLAUSÍVEIS EM UM CONTEXTO REAL, A RES
 
 O nível básico é o básico necessário para existir na API.
 
--------------------------
-|       *NÍVEL BASICO*    |
-|-----------------------|
-| *MATERIAL* | *PRECO BASE* |
--------------------------
-| pinho      | R$0,10   |
-| carvalho   | R$0,30   |
-| ébano      | R$5,00   |
-|-----------------------|
+
+| *NÍVEL BASICO* |
+|----------------|
+| *MATERIAL*     | *PRECO BASE* |
+|----------------|--------------|
+| pinho          | R$0,10       |
+| carvalho       | R$0,30       |
+| ébano          | R$5,00       |
+
 
 Existe também o nível avançado que servirá para ser feito o benchmark que possui mais materiais, a ideia é ter mais opções para buscar dentre as opções:
 
--------------------------------------
-|            *NÍVEL AVANÇADO*       |
-|-----------------------------------|
-|     *MATERIAL*    | *PRECO BASE*  |
-------------------------------------|
-| pinho             |     R$0,10    |
-| compensado        |     R$0,12    |
-| mdf               |     R$0,15    |
-| formica           |     R$0,18    |
-| freijó            |     R$0,20    |
-| cedro             |     R$0,25    |
-| carvalho          |     R$0,30    |
-| ipê               |     R$0,45    |
-| mogno             |     R$0,50    |
-| imbuia            |     R$0,55    |
-| jacarandá         |     R$0,60    |
-| aço inoxidável    |     R$1,50    |
-| aço temperado     |     R$2,00    |
-| ébano             |     R$5,00    |
-|-----------------------------------|
+
+| *NÍVEL AVANÇADO*  |
+|-------------------|
+| *MATERIAL*        | *PRECO BASE* |
+|-------------------|--------------|
+| pinho             | R$0,10       |
+| compensado        | R$0,12       |
+| mdf               | R$0,15       |
+| formica           | R$0,18       |
+| freijó            | R$0,20       |
+| cedro             | R$0,25       |
+| carvalho          | R$0,30       |
+| ipê               | R$0,45       |
+| mogno             | R$0,50       |
+| imbuia            | R$0,55       |
+| jacarandá         | R$0,60       |
+| aço inoxidável    | R$1,50       |
+| aço temperado     | R$2,00       |
+| ébano             | R$5,00       |
+
 
 A payload de request e de resposta devem seguir o seguinte padrão:
 
