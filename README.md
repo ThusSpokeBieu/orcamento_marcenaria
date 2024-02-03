@@ -65,7 +65,7 @@ Fique à vontade para fazer comentários, divulgar o repositório, criar forks, 
 ## Lista de Implementações
 
 - [.NET](./codes/dotnet/)
-- - [.NET Core 8](./codes/dotnet/MarcenariaDotNet/)
+    - [.NET Core 8](./codes/dotnet/MarcenariaDotNet/)
 
 
 - [Go](./codes/go/)
