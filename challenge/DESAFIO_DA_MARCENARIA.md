@@ -21,6 +21,26 @@ Pode haver um endpoint que utilize cache (a fim de comparação), mas será mens
 
 OS NÚMEROS NÃO PRECISAM E NEM DEVEM SER PLAUSÍVEIS EM UM CONTEXTO REAL, A REST API É COMPLETAMENTE HIPOTÉTICA.
 
+### RECURSOS
+
+Existe uma documentação de OPEN API que deve ser seguida. Assim como exemplos de requisições e de respostas aqui.
+
+Os materiais e geometrias disponíveis estão no final dessa documentação.
+
+- POST /orcamentos
+Recebe uma payload json com uma lista de móveis, detalhes de geometrias, seus materiais. Retorna o orçamento detalhado de todos.
+É o recurso utilizado para o benchmark.
+
+- POST /orcamento-unitario
+Recebe a payload json com os dados de um único móvel, detalhes das geometrias e seus materiais. Retorna o orçamento detalhado.
+
+- GET /geometrias 
+Deve retornar uma lista no formato JSON com os detalhes de todas geometrias disponíveis e os .
+
+- GET /materiais 
+Deve retornar uma lista no formato JSON com os detalhes de todos materiais disponíveis e seus preços base.
+
+
 ### MATERIAIS E PREÇOS BASES
 
 O nível básico é o básico necessário para existir na API.
@@ -69,28 +89,18 @@ Existe também o nível avançado que servirá para ser feito o benchmark que po
 | CILINDRO       | 6 * pi * raio base * (raio base + altura)                             |
 | PARALELEPIPEDO | 2 * (comprimento * largura + comprimento * altura + largura * altura) |
 
+
 *NIVEL AVANÇADO*
 
-| *GEOMETRIA*              | *FÓRMULA*                                                 |
-|--------------------------|-----------------------------------------------------------|
-| ESFERA                   | 2×pi×raio²                                                |
-| CUBO                     | 6×lado²                                                   |
-| CILINDRO                 | 6×pi×raio base×(raio base + altura)                       |
-| PARALELEPIPEDO           | 2×(comprimento×largura+largura×altura+altura×comprimento) |
-| PIRAMIDE BASE QUADRADA   | lado²+4×(lado×altura/2)                                   |
-| PIRAMIDE BASE TRIANGULAR |                                                           | 
-| DISCO                    | pi×raio²                                                  |
-
-| *GEOMETRIA*              | *FÓRMULA*                                                                                           |
-|--------------------------|-----------------------------------------------------------------------------------------------------|
-| ESFERA                   | \(2 \pi \times \text{raio}^2\)                                                                     |
-| CUBO                     | \(6 \times \text{lado}^2\)                                                                         |
-| CILINDRO                 | \(2 \pi \times \text{raio base} \times (\text{raio base} + \text{altura})\)                         |
-| PARALELEPIPEDO           | \(2 \times (\text{comprimento} \times \text{largura} + \text{largura} \times \text{altura} + \text{altura} \times \text{comprimento})\) |
-| PIRÂMIDE BASE QUADRADA   | \(\text{lado}^2 + 4 \times (\text{lado} \times \text{altura}/2)\)                                   |
-| PIRÂMIDE BASE TRIANGULAR | \(\frac{\sqrt{3}}{4} \times \text{lado}^2 + 3 \times (\text{lado} \times \text{altura}/2)\)         |
-| DISCO                    | \(\pi \times \text{raio}^2\)                                                                       |
-
+| *GEOMETRIA*              | *FÓRMULA*                                                             |
+|--------------------------|-----------------------------------------------------------------------|
+| ESFERA                   | 2 × pi × raio²                                                        |
+| CUBO                     | 6 × lado²                                                             |
+| CILINDRO                 | 6 × pi × raio base × (raio base + altura)                             |
+| PARALELEPIPEDO           | 2 × (comprimento × largura + largura × altura + altura × comprimento) |
+| PIRAMIDE BASE QUADRADA   | lado² + 4 × (lado × altura / 2)                                       |
+| DISCO                    | pi × raio²                                                            |
+| CONE                     | (1/3) × pi × raio base² × altura                                      |
 
 
 A payload de request e de resposta devem seguir o seguinte padrão:
