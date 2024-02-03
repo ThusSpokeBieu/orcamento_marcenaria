@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"marcenaria/models"
-	"marcenaria/notification"
 	"os"
 	"strconv"
 	"time"
@@ -18,6 +16,8 @@ import (
 	"github.com/gofiber/swagger"
 
 	_ "marcenaria/docs"
+	"marcenaria/models"
+	"marcenaria/notification"
 )
 
 func main() {
@@ -42,7 +42,8 @@ func main() {
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "*",
 		AllowHeaders: "*",
-		AllowMethods: "*"}))
+		AllowMethods: "*",
+	}))
 
 	app.Use(cache.New(cache.Config{
 		ExpirationGenerator: func(c *fiber.Ctx, cfg *cache.Config) time.Duration {

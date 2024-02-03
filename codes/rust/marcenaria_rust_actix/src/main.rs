@@ -52,7 +52,7 @@ async fn main() -> std::io::Result<()> {
 
     Server::build()
         .backlog(16500)
-        .workers(num_cpus::get())
+        .workers(1)
         .bind("Marcenaria", "0.0.0.0:8080", move || {
             HttpService::build()
                 .keep_alive(KeepAlive::Timeout(Duration::ZERO))
