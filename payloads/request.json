@@ -1,0 +1,399 @@
+
+{
+  "moveis": 
+    [
+      {
+        "movel": "CADEIRA",
+        "geometrias": [
+          {
+            "geometria": "cilindro",
+            "material": "Carvalho",
+            "estrutura": "perna dianteira esquerda",
+            "raio_base": "1.5cm",
+            "altura": "40cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "Carvalho",
+            "estrutura": "perna dianteira direita",
+            "raio_base": "1.5cm",
+            "altura": "40cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "Carvalho",
+            "estrutura": "perna traseira esquerda",
+            "raio_base": "1.5cm",
+            "altura": "40cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "Carvalho",
+            "estrutura": "perna traseira direita",
+            "raio_base": "1.5cm",
+            "altura": "40cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Ebano",
+            "estrutura": "assento",
+            "comprimento": "40cm",
+            "largura": "40cm",
+            "altura": "5cm"
+          },
+          {
+            "geometria": "paralelepipedo",
+            "material": "Ebano",
+            "estrutura": "encosto",
+            "comprimento": "40cm",
+            "largura": "2cm",
+            "altura": "30cm"
+          }
+        ]
+      },
+      {
+        "movel": "MESA",
+        "geometrias": [
+          {
+            "geometria": "cilindro",
+            "material": "Pinho",
+            "estrutura": "perna dianteira esquerda",
+            "raio_base": "2cm",
+            "altura": "50cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "Pinho",
+            "estrutura": "perna dianteira direita",
+            "raio_base": "2cm",
+            "altura": "50cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "Pinho",
+            "estrutura": "perna traseira esquerda",
+            "raio_base": "2cm",
+            "altura": "50cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "Pinho",
+            "estrutura": "perna traseira direita",
+            "raio_base": "2cm",
+            "altura": "50cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Compensado",
+            "estrutura": "tampo",
+            "comprimento": "80cm",
+            "largura": "60cm",
+            "altura": "3cm"
+          }
+        ]
+      },
+      {
+        "movel": "SOFÁ",
+        "geometrias": [
+          {
+            "geometria": "paralelepípedo",
+            "material": "MDF",
+            "estrutura": "base",
+            "comprimento": "180cm",
+            "largura": "60cm",
+            "altura": "10cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "MDF",
+            "estrutura": "braço esquerdo",
+            "comprimento": "10cm",
+            "largura": "60cm",
+            "altura": "40cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "MDF",
+            "estrutura": "braço direito",
+            "comprimento": "10cm",
+            "largura": "60cm",
+            "altura": "40cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Formica",
+            "estrutura": "almofada do assento",
+            "comprimento": "160cm",
+            "largura": "60cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Formica",
+            "estrutura": "almofada do encosto",
+            "comprimento": "160cm",
+            "largura": "10cm",
+            "altura": "30cm"
+          }
+        ]
+      },
+      {
+        "movel": "CAMA",
+        "geometrias": [
+          {
+            "geometria": "paralelepípedo",
+            "material": "Freijó",
+            "estrutura": "base",
+            "comprimento": "200cm",
+            "largura": "140cm",
+            "altura": "20cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Freijó",
+            "estrutura": "cabeceira",
+            "comprimento": "140cm",
+            "largura": "5cm",
+            "altura": "50cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Freijó",
+            "estrutura": "peseira",
+            "comprimento": "140cm",
+            "largura": "5cm",
+            "altura": "30cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Formica",
+            "estrutura": "colchão",
+            "comprimento": "190cm",
+            "largura": "130cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Formica",
+            "estrutura": "travesseiro",
+            "comprimento": "60cm",
+            "largura": "40cm",
+            "altura": "10cm"
+          }
+        ]
+      },
+      {
+        "movel": "GUARDA-ROUPA",
+        "geometrias": [
+          {
+            "geometria": "paralelepípedo",
+            "material": "Cedro",
+            "estrutura": "corpo",
+            "comprimento": "120cm",
+            "largura": "60cm",
+            "altura": "200cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Cedro",
+            "estrutura": "porta esquerda",
+            "comprimento": "60cm",
+            "largura": "2cm",
+            "altura": "200cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Cedro",
+            "estrutura": "porta direita",
+            "comprimento": "60cm",
+            "largura": "2cm",
+            "altura": "200cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Cedro",
+            "estrutura": "gaveta superior",
+            "comprimento": "60cm",
+            "largura": "55cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Cedro",
+            "estrutura": "gaveta inferior",
+            "comprimento": "60cm",
+            "largura": "55cm",
+            "altura": "15cm"
+          }
+        ]
+      },
+      {
+        "movel": "ABAJUR",
+        "geometrias": [
+          {
+            "geometria": "cilindro",
+            "material": "Aço inoxidável",
+            "estrutura": "base",
+            "raio_base": "10cm",
+            "altura": "2cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "Aço inoxidável",
+            "estrutura": "haste",
+            "raio_base": "1cm",
+            "altura": "30cm"
+          },
+          {
+            "geometria": "cone",
+            "material": "Formica",
+            "estrutura": "cúpula",
+            "raio_base": "15cm",
+            "altura": "20cm"
+          }
+        ]
+      },
+      {
+        "movel": "BANCO",
+        "geometrias": [
+          {
+            "geometria": "cilindro",
+            "material": "Carvalho",
+            "estrutura": "perna dianteira esquerda",
+            "raio_base": "2cm",
+            "altura": "45cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "Carvalho",
+            "estrutura": "perna dianteira direita",
+            "raio_base": "2cm",
+            "altura": "45cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "Carvalho",
+            "estrutura": "perna traseira esquerda",
+            "raio_base": "2cm",
+            "altura": "45cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "Carvalho",
+            "estrutura": "perna traseira direita",
+            "raio_base": "2cm",
+            "altura": "45cm"
+          },
+          {
+            "geometria": "disco",
+            "material": "Compensado",
+            "estrutura": "assento",
+            "raio": "25cm",
+            "espessura": "3cm"
+          }
+        ]
+      },
+      {
+        "movel": "CRIADO-MUDO",
+        "geometrias": [
+          {
+            "geometria": "cubo",
+            "material": "MDF",
+            "estrutura": "corpo",
+            "aresta": "40cm"
+          },
+          {
+            "geometria": "cubo",
+            "material": "MDF",
+            "estrutura": "gaveta",
+            "aresta": "35cm"
+          },
+          {
+            "geometria": "esfera",
+            "material": "Aço temperado",
+            "estrutura": "puxador",
+            "raio": "1cm"
+          }
+        ]
+      },
+      {
+        "movel": "LUMINÁRIA",
+        "geometrias": [
+          {
+            "geometria": "pirâmide base quadrada",
+            "material": "Ébano",
+            "estrutura": "base",
+            "lado_base": "20cm",
+            "altura": "10cm"
+          },
+          {
+            "geometria": "cilindro",
+            "material": "Ébano",
+            "estrutura": "haste",
+            "raio_base": "1cm",
+            "altura": "40cm"
+          },
+          {
+            "geometria": "esfera",
+            "material": "Formica",
+            "estrutura": "cúpula",
+            "raio": "15cm"
+          },
+          {
+        "movel": "POLTRONA",
+        "geometrias": [
+          {
+            "geometria": "paralelepípedo",
+            "material": "MDF",
+            "estrutura": "base",
+            "comprimento": "80cm",
+            "largura": "80cm",
+            "altura": "10cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "MDF",
+            "estrutura": "braço esquerdo",
+            "comprimento": "10cm",
+            "largura": "80cm",
+            "altura": "40cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "MDF",
+            "estrutura": "braço direito",
+            "comprimento": "10cm",
+            "largura": "80cm",
+            "altura": "40cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Formica",
+            "estrutura": "almofada do assento",
+            "comprimento": "60cm",
+            "largura": "80cm",
+            "altura": "15cm"
+          },
+          {
+            "geometria": "paralelepípedo",
+            "material": "Formica",
+            "estrutura": "almofada do encosto",
+            "comprimento": "60cm",
+            "largura": "10cm",
+            "altura": "40cm"
+          }
+        ]
+      },
+      {
+        "movel": "PUFF",
+        "geometrias": [
+          {
+            "geometria": "esfera",
+            "material": "Formica",
+            "estrutura": "corpo",
+            "raio": "30cm"
+          }
+        ]
+      }
+    ]
+}
