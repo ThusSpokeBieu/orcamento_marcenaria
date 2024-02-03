@@ -86,7 +86,7 @@ Fique à vontade para fazer comentários, divulgar o repositório, criar forks, 
 ## Contato 
 
 Gabriel M. Costa
-- email: gmessiasc@gmail.com
-- linkedin: https://www.linkedin.com/in/gmessiasc/
-- discord: @gmessiasc
 - github: @gmessiasc
+
+Ronaldo Junior
+- github: @itujo
