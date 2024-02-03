@@ -65,12 +65,12 @@ Fique à vontade para fazer comentários, divulgar o repositório, criar forks, 
 ## Lista de Implementações
 
 - [.NET](./codes/dotnet/)
- - [.NET Core 8](./codes/dotnet/MarcenariaDotNet/)
+- - [.NET Core 8](./codes/dotnet/MarcenariaDotNet/)
 
 
 - [Go](./codes/go/)
- - [Fiber Framework](./codes/go/marcenaria-go-fiber/)
- - [Hertz Framework](./codes/go/marcenaria-go-hertz/go.mod) 
+- - [Fiber Framework](./codes/go/marcenaria-go-fiber/)
+- - [Hertz Framework](./codes/go/marcenaria-go-hertz/go.mod) 
 
 
 - [Java](./codes/java/)
@@ -86,7 +86,7 @@ Fique à vontade para fazer comentários, divulgar o repositório, criar forks, 
 ## Contato 
 
 Gabriel M. Costa
-email: gmessiasc@gmail.com
-linkedin: https://www.linkedin.com/in/gmessiasc/
-discord: @gmessiasc
-github: @gmessiasc
+- email: gmessiasc@gmail.com
+- linkedin: https://www.linkedin.com/in/gmessiasc/
+- discord: @gmessiasc
+- github: @gmessiasc
