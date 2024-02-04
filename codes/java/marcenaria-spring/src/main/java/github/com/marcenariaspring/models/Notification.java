@@ -13,8 +13,7 @@ public class Notification {
   private final String message;
   private final List<String> errors;
 
-  public Notification(
-    final String message, final HttpStatus status, final List<String> errors) {
+  public Notification(final String message, final HttpStatus status, final List<String> errors) {
     this.timestamp = Instant.now();
     this.status = status.value();
     this.error = status.getReasonPhrase();

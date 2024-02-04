@@ -22,36 +22,29 @@ import reactor.core.publisher.Mono;
 @RestControllerAdvice(annotations = RestController.class)
 public class RestExceptionHandler {
 
-  @ExceptionHandler(value = { MethodArgumentNotValidException.class, ValidationException.class })
+  @ExceptionHandler(value = {MethodArgumentNotValidException.class, ValidationException.class})
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public Mono<ResponseEntity<Notification>> handleMethodArgumentNotValid(final MethodArgumentNotValidException err) {
+  public Mono<ResponseEntity<Notification>> handleMethodArgumentNotValid(
+      final MethodArgumentNotValidException err) {
     List<String> errors = new ArrayList<>();
 
-    for (FieldError error : err
-      .getBindingResult()
-      .getFieldErrors()) {
-      errors.add(String.format("%s -> '%s' é um valor inválido; %s.",
-                               error.getField(),
-                               error.getRejectedValue(),
-                               error.getDefaultMessage()));
+    for (FieldError error : err.getBindingResult().getFieldErrors()) {
+      errors.add(
+          String.format(
+              "%s -> '%s' é um valor inválido; %s.",
+              error.getField(), error.getRejectedValue(), error.getDefaultMessage()));
     }
 
-    for (ObjectError error : err
-      .getBindingResult()
-      .getGlobalErrors()) {
-      errors.add(String.format("%s -> %s.",
-                               error.getObjectName(),
-                               error.getDefaultMessage()));
+    for (ObjectError error : err.getBindingResult().getGlobalErrors()) {
+      errors.add(String.format("%s -> %s.", error.getObjectName(), error.getDefaultMessage()));
     }
 
-    Notification notification = new Notification(
-      String.format(
-        "Existem %d argumentos inválidos",
-        err.getErrorCount()),
-      HttpStatus.BAD_REQUEST,
-      errors);
+    Notification notification =
+        new Notification(
+            String.format("Existem %d argumentos inválidos", err.getErrorCount()),
+            HttpStatus.BAD_REQUEST,
+            errors);
 
     return Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, notification.toString()));
   }
-
 }

@@ -6,25 +6,28 @@ import github.gmess.models.Material;
 import github.gmess.utils.MaterialSerializer;
 import github.gmess.utils.NumberUtils;
 
-@CompiledJson(name = "cubo")
-public record Cubo(@JsonAttribute(name = "estrutura") String estruturaCubica,
-    @JsonAttribute(converter = MaterialSerializer.class) Material material, String lado)
+@CompiledJson(name = "disco")
+public record Disco(
+    @JsonAttribute(name = "estrutura") String estruturaDisco,
+    @JsonAttribute(converter = MaterialSerializer.class) Material material,
+    String raio)
     implements Geometria {
 
   @Override
   public final String getGeometria() {
-    return "cubo";
+    return "disco";
   }
 
   @Override
   public final String getEstrutura() {
-    return this.estruturaCubica();
+    return this.estruturaDisco();
   }
 
   @Override
   public final double getArea() {
-    final double lado = NumberUtils.centimetersToDouble(this.lado);
-    return 6 * Math.pow(lado, 2);
+    final double raio = NumberUtils.centimetersToDouble(this.raio);
+
+    return Math.PI * Math.pow(raio, 2);
   }
 
   @Override

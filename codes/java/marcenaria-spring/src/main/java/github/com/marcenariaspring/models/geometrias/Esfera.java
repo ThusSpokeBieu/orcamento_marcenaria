@@ -5,35 +5,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import github.com.marcenariaspring.models.materiais.Material;
 import github.com.marcenariaspring.utils.StrUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Esfera extends Geometria {
-
-  @Schema(
-    description = "A estrutura da Geometria",
-    example = "Estrutura Esférica")
-  @JsonProperty("estrutura")
-  private String estrutura = "Estrutura Esférica";
-
-  @Schema(description = "Tipo da geometria", example = "Esfera")
-  private String geometria = "Esfera";
-
-  @Schema(description = "Tamanho do raio em centimetros da esfera", example = "1.0cm")
-  private Double raio;
+public record Esfera(
+    @Schema(description = "A estrutura da Geometria", example = "Estrutura Esférica")
+        @JsonProperty("estrutura")
+        String estrutura,
+    @Schema(description = "Tipo da geometria", example = "Esfera") String geometria,
+    @Schema(description = "Tamanho do raio em centimetros da esfera", example = "1.0cm")
+        double raio,
+    @JsonProperty("material")
+        @Schema(
+            description = "Tipo do material",
+            defaultValue = "pinho",
+            enumAsRef = true,
+            oneOf = Material.class,
+            nullable = false)
+        Material material)
+    implements Geometria {
 
   @JsonCreator
-  public Esfera(
-    @JsonProperty("estrutura") String estrutura,
-    @JsonProperty("raio") String raio) {
-    this.estrutura = estrutura;
-    this.raio = StrUtils.strToDouble(raio);
+  public static Esfera from(
+      @JsonProperty("geometria") String geometria,
+      @JsonProperty("estrutura") String estrutura,
+      @JsonProperty("raio") String raio,
+      @JsonProperty("material") Material material) {
+    return new Esfera(estrutura, geometria, StrUtils.strToDouble(raio), material);
   }
 
   @JsonProperty("raio")
@@ -42,7 +38,22 @@ public class Esfera extends Geometria {
   }
 
   @Override
-  public Double getPreco(Material material) {
+  public double getPreco() {
     return (4 * Math.PI * Math.pow(raio, 2)) * material.getPrecoBase();
+  }
+
+  @Override
+  public String getGeometria() {
+    return "esfera";
+  }
+
+  @Override
+  public String getMaterial() {
+    return material.getNomeAsString();
+  }
+
+  @Override
+  public String getEstrutura() {
+    return estrutura();
   }
 }

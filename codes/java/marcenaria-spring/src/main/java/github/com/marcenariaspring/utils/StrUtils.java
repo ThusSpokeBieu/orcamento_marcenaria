@@ -6,14 +6,9 @@ import java.text.Normalizer;
 public class StrUtils {
 
   private static final DecimalFormat cmFormatter = new DecimalFormat("#########,##0.00");
+
   public static Double strToDouble(final String str) {
-    return Double.parseDouble(str
-                                .replaceAll(
-                                  "[^\\d.]",
-                                  "")
-                                .replaceAll(
-                                  ",",
-                                  "."));
+    return Double.parseDouble(str.replaceAll("[^\\d.,]", "").replaceAll(",", "."));
   }
 
   public static String doubleToStrCm(final Double aDouble) {

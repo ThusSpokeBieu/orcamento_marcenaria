@@ -12,75 +12,62 @@ import io.vertx.core.impl.logging.Logger;
 import io.vertx.core.impl.logging.LoggerFactory;
 import io.vertx.mutiny.core.Vertx;
 
-public class App  {
-    public final static int PORT = 8080;
-    private final static Logger logger = LoggerFactory.getLogger(App.class.getName());
-    public static void main( String[] args ) throws Exception {
-        int eventLoopPoolSize = 1;//VertxOptions.DEFAULT_EVENT_LOOP_POOL_SIZE;
+public class App {
+  public static final int PORT = 8080;
+  private static final Logger logger = LoggerFactory.getLogger(App.class.getName());
 
-        long startTime = System.currentTimeMillis();
+  public static void main(String[] args) throws Exception {
+    int eventLoopPoolSize = VertxOptions.DEFAULT_EVENT_LOOP_POOL_SIZE;
 
-        Vertx vertx = Vertx.vertx(
-          new VertxOptions()
-            .setEventLoopPoolSize(eventLoopPoolSize)
-            .setPreferNativeTransport(true));
+    long startTime = System.currentTimeMillis();
 
-        vertx.exceptionHandler(err -> {
-            err.printStackTrace();
-        });
+    Vertx vertx = Vertx.vertx(
+        new VertxOptions().setEventLoopPoolSize(eventLoopPoolSize).setPreferNativeTransport(true));
 
-        printInfo(vertx);
+    vertx.exceptionHandler(err -> {
+      err.printStackTrace();
+    });
 
-        logger.info("🚀 Starting Vert.x");
+    printInfo(vertx);
 
-        vertx.deployVerticle(
-          MainVerticle.class.getName(),
+    logger.info("🚀 Starting Vert.x");
 
-          new DeploymentOptions()
-            .setHa(true)
-            .setWorkerPoolSize(eventLoopPoolSize)
-            .setInstances(eventLoopPoolSize)
-            .setThreadingModel(ThreadingModel.VIRTUAL_THREAD)
+    vertx.deployVerticle(MainVerticle.class.getName(),
+        new DeploymentOptions().setHa(true).setWorkerPoolSize(eventLoopPoolSize)
+            .setInstances(eventLoopPoolSize).setThreadingModel(ThreadingModel.VIRTUAL_THREAD)
             .setMaxWorkerExecuteTimeUnit(TimeUnit.SECONDS))
-         .subscribe()
-         .with(
-            ok -> {
-              long vertxTime = System.currentTimeMillis();
-              logger.info("✅ Deployment success");
-              logger.info("💡 Vert.x app started in " + (vertxTime - startTime) + "ms");
-            },
-            err -> logger.error("🔥 Deployment failure", err)
-         );
+        .subscribe().with(ok -> {
+          long vertxTime = System.currentTimeMillis();
+          logger.info("✅ Deployment success");
+          logger.info("💡 Vert.x app started in " + (vertxTime - startTime) + "ms");
+        }, err -> logger.error("🔥 Deployment failure", err));
+  }
 
-    }
+  private static void printInfo(Vertx vertx) {
+    boolean nativeTransport = vertx.isNativeTransportEnabled();
+    String version = "unknown";
 
-    private static void printInfo(Vertx vertx) {
-        boolean nativeTransport = vertx.isNativeTransportEnabled();
-        String version = "unknown";
+    try {
+      InputStream in =
+          Vertx.class.getClassLoader().getResourceAsStream("META-INF/vertx/vertx-version.txt");
 
-        try {
-            InputStream in = Vertx.class
-              .getClassLoader()
-              .getResourceAsStream("META-INF/vertx/vertx-version.txt");
-
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            byte[] buffer = new byte[256];
-            while (true) {
-                int amount = in.read(buffer);
-                if (amount == -1) {
-                    break;
-                }
-                out.write(buffer, 0, amount);
-            }
-            version = out.toString();
-        } catch (IOException e) {
-            logger.error("Could not read Vertx version", e);;
+      ByteArrayOutputStream out = new ByteArrayOutputStream();
+      byte[] buffer = new byte[256];
+      while (true) {
+        int amount = in.read(buffer);
+        if (amount == -1) {
+          break;
         }
-
-        logger.info("Vertx: " + version);
-        logger.info("Event Loop Size: " + ((MultithreadEventExecutorGroup)vertx.nettyEventLoopGroup()).executorCount());
-        logger.info("Native transport : " + nativeTransport);
-
+        out.write(buffer, 0, amount);
+      }
+      version = out.toString();
+    } catch (IOException e) {
+      logger.error("Could not read Vertx version", e);;
     }
 
+    logger.info("Vertx: " + version);
+    logger.info("Event Loop Size: "
+        + ((MultithreadEventExecutorGroup) vertx.nettyEventLoopGroup()).executorCount());
+    logger.info("Native transport : " + nativeTransport);
+  }
 }

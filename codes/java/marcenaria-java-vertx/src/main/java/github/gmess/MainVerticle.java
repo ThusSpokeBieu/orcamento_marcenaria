@@ -1,12 +1,14 @@
 package github.gmess;
 
 import static github.gmess.App.PORT;
-import java.io.IOException;
+
 import com.dslplatform.json.DslJson;
 import com.dslplatform.json.JsonReader;
 import com.dslplatform.json.JsonWriter;
 import github.gmess.models.Movel;
+import github.gmess.models.MovelList;
 import github.gmess.models.Orcamento;
+import github.gmess.models.OrcamentoList;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.vertx.core.AbstractVerticle;
 import io.vertx.core.impl.logging.Logger;
@@ -16,6 +18,7 @@ import io.vertx.mutiny.core.http.HttpServer;
 import io.vertx.mutiny.ext.web.Router;
 import io.vertx.mutiny.ext.web.RoutingContext;
 import io.vertx.mutiny.ext.web.handler.BodyHandler;
+import java.io.IOException;
 
 public class MainVerticle extends AbstractVerticle {
 
@@ -24,10 +27,10 @@ public class MainVerticle extends AbstractVerticle {
   final JsonWriter writer = dslJson.newWriter();
   final JsonReader<Object> reader = dslJson.newReader();
 
-  final static CharSequence JSON_CONTENT_TYPE = HttpHeaders.createOptimized("application/json");
-  final static CharSequence CONTENT_TYPE = HttpHeaders.createOptimized("Content-Type");
+  static final CharSequence JSON_CONTENT_TYPE = HttpHeaders.createOptimized("application/json");
+  static final CharSequence CONTENT_TYPE = HttpHeaders.createOptimized("Content-Type");
 
-  final static String STR_JSON_CONTENT_TYPE = JSON_CONTENT_TYPE.toString();
+  static final String STR_JSON_CONTENT_TYPE = JSON_CONTENT_TYPE.toString();
 
   @Override
   public Uni<Void> asyncStart() {
@@ -35,49 +38,92 @@ public class MainVerticle extends AbstractVerticle {
 
     BodyHandler bodyHandler = BodyHandler.create();
 
-    router.post("/orcamento")
-      .handler(bodyHandler::handle)
-      .produces(STR_JSON_CONTENT_TYPE)
-      .consumes(STR_JSON_CONTENT_TYPE)
-      .respond(this::createOrcamento);
+    router
+        .post("/orcamentos")
+        .handler(bodyHandler::handle)
+        .produces(STR_JSON_CONTENT_TYPE)
+        .consumes(STR_JSON_CONTENT_TYPE)
+        .respond(this::createOrcamentos);
 
-    Uni<HttpServer> startHttpServer = vertx
-                                        .createHttpServer()
-                                        .requestHandler(router)
-                                        .listen(PORT)
-                                        .onItem()
-                                        .invoke(() -> logger.info("🚀 ✅ HTTP Server listening on port " + PORT));
+    router
+        .post("/orcamento-un")
+        .handler(bodyHandler::handle)
+        .produces(STR_JSON_CONTENT_TYPE)
+        .consumes(STR_JSON_CONTENT_TYPE)
+        .respond(this::createOrcamento);
+
+    Uni<HttpServer> startHttpServer =
+        vertx
+            .createHttpServer()
+            .requestHandler(router)
+            .listen(PORT)
+            .onItem()
+            .invoke(() -> logger.info("🚀 ✅ HTTP Server listening on port " + PORT));
 
     return Uni.combine().all().unis(startHttpServer).discardItems();
   }
 
- private Uni<String> createOrcamento(RoutingContext ctx) {
+  private Uni<String> createOrcamentos(RoutingContext ctx) {
 
     byte[] payload = ctx.body().buffer().getBytes();
 
     try {
-        return Uni.createFrom()
-            .item(payload)
-            .map(p -> {
+      return Uni.createFrom()
+          .item(payload)
+          .map(
+              p -> {
                 try {
-                    return reader.process(p, p.length).next(Movel.class);
+                  return reader.process(p, p.length).next(MovelList.class);
                 } catch (IOException e) {
-                    throw new RuntimeException("Error processing JSON input", e);
+                  throw new RuntimeException("Error processing JSON input", e);
                 }
-            })
-            .map(Orcamento::from)
-            .map(orcamento -> {
+              })
+          .map(OrcamentoList::from)
+          .map(
+              orcamento -> {
                 try {
-                    writer.reset();
-                    dslJson.serialize(writer, orcamento);
+                  writer.reset();
+                  dslJson.serialize(writer, orcamento);
 
-                    return writer.toString();
+                  return writer.toString();
                 } catch (IOException e) {
-                    throw new RuntimeException("Error serializing JSON", e);
+                  throw new RuntimeException("Error serializing JSON", e);
                 }
-            });
+              });
     } catch (Exception e) {
-        return Uni.createFrom().failure(e);
+      return Uni.createFrom().failure(e);
+    }
+  }
+
+  private Uni<String> createOrcamento(RoutingContext ctx) {
+
+    byte[] payload = ctx.body().buffer().getBytes();
+
+    try {
+      return Uni.createFrom()
+          .item(payload)
+          .map(
+              p -> {
+                try {
+                  return reader.process(p, p.length).next(Movel.class);
+                } catch (IOException e) {
+                  throw new RuntimeException("Error processing JSON input", e);
+                }
+              })
+          .map(Orcamento::from)
+          .map(
+              orcamento -> {
+                try {
+                  writer.reset();
+                  dslJson.serialize(writer, orcamento);
+
+                  return writer.toString();
+                } catch (IOException e) {
+                  throw new RuntimeException("Error serializing JSON", e);
+                }
+              });
+    } catch (Exception e) {
+      return Uni.createFrom().failure(e);
     }
   }
 }

@@ -1,6 +1,7 @@
 package github.com.marcenariaspring.models.geometrias;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import github.com.marcenariaspring.models.materiais.Material;
 import lombok.SneakyThrows;
 
 public class ListaGeometrias {
@@ -17,12 +18,20 @@ public class ListaGeometrias {
     ObjectMapper objectMapper = new ObjectMapper();
     objectMapper.findAndRegisterModules();
 
-    final var esfera = new Esfera("Estrutura Esférica", "1.0cm");
-    final var cubo = new Cubo("Estrutura Cúbica", "1.0cm");
-    final var cilindro = new Cilindro("Estrutura Cilindríca", "1.0cm", "1.0cm");
-    final var paralelepipedo = new Paralelepipedo("Estrutura de Paralelepipedo", "1.0cm", "1.0cm", "1.0cm");
+    final var esfera = Esfera.from("Esfera", "Estrutura Esférica", "1.0cm", Material.EBANO);
+    final var cubo = Cubo.from("Cubo", "Estrutura Cúbica", "1.0cm", Material.CARVALHO);
+    final var cilindro =
+        Cilindro.from("Cilindro", "Estrutura Cilindríca", Material.CARVALHO, "1.0cm", "1.0cm");
+    final var paralelepipedo =
+        Paralelepipedo.from(
+            "Paralelepipedo",
+            "Estrutura de Paralelepipedo",
+            "1.0cm",
+            "1.0cm",
+            "1.0cm",
+            Material.EBANO);
 
-    array = new Geometria[]{esfera, cubo, cilindro, paralelepipedo};
+    array = new Geometria[] {esfera, cubo, cilindro, paralelepipedo};
     json = objectMapper.writeValueAsString(array);
     all = objectMapper.writeValueAsBytes(array);
     return all;

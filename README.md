@@ -61,6 +61,7 @@ Estamos explorando melhores formas de contribuição. Por enquanto, você pode a
 
 Fique à vontade para fazer comentários, divulgar o repositório, criar forks, utilizar o desafio como modelo para algo externo, e contribuir de outras formas.
 
+Você pode também fazer você mesmo um benchmark dos repositórios e compartilhar conosco.
 
 ## Lista de Implementações
 

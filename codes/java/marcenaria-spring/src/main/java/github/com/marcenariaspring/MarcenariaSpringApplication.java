@@ -12,8 +12,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 @EnableAsync
 public class MarcenariaSpringApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MarcenariaSpringApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(MarcenariaSpringApplication.class, args);
+  }
 }

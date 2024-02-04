@@ -5,43 +5,41 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import github.com.marcenariaspring.models.materiais.Material;
 import github.com.marcenariaspring.utils.StrUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Cilindro extends Geometria {
-
-  @Schema(description = "Tipo da geometria", example = "Cilindro")
-  private final String geometria = "Cilindro";
-
-  @Schema(description = "Tamanho da altura do cilindro em centimetros", example = "1.0cm")
-  private Double altura;
-
-  @Schema(
-    description = "Tamanho do raio base do cilindro em centimetros",
-    example = "1.0cm")
-  @JsonProperty("raio_base")
-  private Double raioBase;
-
-  @Schema(
-    description = "A estrutura da Geometria",
-    example = "Estrutura Cilindrica")
-  @JsonProperty("estrutura")
-  private String estrutura = "Estrutura Cilindrica";
+public record Cilindro(
+    @Schema(description = "Tipo da geometria", example = "Cilindro") String geometria,
+    @Schema(description = "Tamanho da altura do cilindro em centimetros", example = "1.0cm")
+        double altura,
+    @JsonProperty("material")
+        @Schema(
+            description = "Tipo do material",
+            defaultValue = "pinho",
+            enumAsRef = true,
+            oneOf = Material.class,
+            nullable = false)
+        Material material,
+    @Schema(description = "Tamanho do raio base do cilindro em centimetros", example = "1.0cm")
+        @JsonProperty("raio_base")
+        double raioBase,
+    @Schema(description = "A estrutura da Geometria", example = "Estrutura Cilindrica")
+        @JsonProperty("estrutura")
+        String estrutura)
+    implements Geometria {
 
   @JsonCreator
-  public Cilindro(
+  public static Cilindro from(
+      @JsonProperty("geometria") String geometria,
       @JsonProperty("estrutura") String estrutura,
+      @JsonProperty("material") Material material,
       @JsonProperty("altura") String altura,
       @JsonProperty("raio_base") String raioBase) {
-    this.estrutura = estrutura;
-    this.altura = StrUtils.strToDouble(altura);
-    this.raioBase = StrUtils.strToDouble(raioBase);
+
+    return new Cilindro(
+        geometria,
+        StrUtils.strToDouble(altura),
+        material,
+        StrUtils.strToDouble(raioBase),
+        estrutura);
   }
 
   @JsonProperty("altura")
@@ -54,8 +52,22 @@ public class Cilindro extends Geometria {
     return StrUtils.doubleToStrCm(raioBase);
   }
 
+  @JsonProperty("estrutura")
+  public String getEstrutura() {
+    return estrutura();
+  }
+
+  public String getGeometria() {
+    return geometria();
+  }
+
   @Override
-  public Double getPreco(Material material) {
-    return (2 * Math.PI * raioBase * (raioBase + altura)) * material.getPrecoBase();
+  public String getMaterial() {
+    return material.getNomeAsString();
+  }
+
+  @Override
+  public double getPreco() {
+    return (2 * Math.PI * raioBase * (raioBase + altura)) * material().getPrecoBase();
   }
 }
