@@ -1,10 +1,6 @@
 package github.gmess.models;
 
-import java.util.Set;
 import github.gmess.models.geometrias.Geometria;
+import java.util.List;
 
-public record Movel(
-  String movel,
-  Material material,
-  Set<Geometria> geometrias) {}
-
+public record Movel(String movel, List<Geometria> geometrias) {}

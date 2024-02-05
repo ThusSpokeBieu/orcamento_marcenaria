@@ -1,35 +1,20 @@
 package github.gmess.models;
 
-import java.util.HashSet;
-import java.util.Set;
 import github.gmess.models.geometrias.Geometria;
-import github.gmess.utils.StrUtils;
+import java.util.ArrayList;
+import java.util.List;
 
-public record Orcamento(
-  String movel,
-  Material material,
-  String precoTotal,
-  Set<EstruturaValor> estruturas
-) {
+public record Orcamento(String movel, double precoTotal, List<EstruturaValor> estruturas) {
 
   public static Orcamento from(final Movel movel) {
     double precoFinal = 0;
-    final var geometrias = movel.geometrias();
-    final var material = movel.material();
-    final Set<EstruturaValor> estruturas = new HashSet<>();
+    final List<EstruturaValor> estruturas = new ArrayList<>();
 
-    for(Geometria geometria : movel.geometrias()) {
-      final double precoGeometria = geometria.getArea() * material.getPrecoBase();
-      precoFinal += precoGeometria;
-
-      estruturas.add(EstruturaValor.from(geometria, StrUtils.doubleToReal(precoGeometria)));
+    for (Geometria geometria : movel.geometrias()) {
+      estruturas.add(EstruturaValor.from(geometria));
+      precoFinal += geometria.getPreco();
     }
 
-    return new Orcamento(
-      movel.movel(),
-      movel.material(),
-      StrUtils.doubleToReal(precoFinal),
-      estruturas
-    );
+    return new Orcamento(movel.movel(), precoFinal, estruturas);
   }
 }

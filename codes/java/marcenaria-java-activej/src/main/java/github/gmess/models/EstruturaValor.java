@@ -2,19 +2,14 @@ package github.gmess.models;
 
 import github.gmess.models.geometrias.Geometria;
 
-/**
- * EstruturaValor
- */
-public record EstruturaValor(
-  String estrutura,
-  String geometria,
-  String valor
-) {
+/** EstruturaValor */
+public record EstruturaValor(String geometria, String estrutura, String material, double valor) {
 
-  public static EstruturaValor from(Geometria geometria, String valor) {
+  public static EstruturaValor from(Geometria geometria) {
     return new EstruturaValor(
-      geometria.getEstrutura(), 
-      geometria.getGeometria(), 
-      valor);
+        geometria.getGeometria(),
+        geometria.getEstrutura(),
+        geometria.getMaterial(),
+        geometria.getPreco());
   }
 }
